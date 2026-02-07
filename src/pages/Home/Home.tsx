@@ -3,18 +3,43 @@ import Container from '@components/Container/Container';
 import Section from '@components/Section/Section';
 import Button from '@components/Button/Button';
 import Card from '@components/Card/Card';
+import Hero from '@components/Hero/Hero';
+import WhoWeAre from '@components/WhoWeAre/WhoWeAre';
+import WhatWeDo from '@components/WhatWeDo/WhatWeDo';
+import WhyChooseUs from '@components/WhyChooseUs/WhyChooseUs';
+import IndustriesWeServe from '@components/IndustriesWeServe/IndustriesWeServe';
+import OurClients from '@components/OurClients/OurClients';
+import Sustainability from '@components/Sustainability/Sustainability';
+import CareersCTA from '@components/CareersCTA/CareersCTA';
 import { Link } from 'react-router-dom';
 import { ROUTES } from '@utils/constants';
-import { FaRocket, FaChartLine, FaCogs, FaUsers, FaAward, FaGlobeAmericas } from 'react-icons/fa';
+import {
+  FaRocket,
+  FaChartLine,
+  FaCogs,
+  FaUsers,
+  FaIndustry,
+  FaHandshake,
+  FaMapMarkedAlt,
+  FaAward,
+  FaUserTie,
+  FaCertificate,
+  FaMobileAlt,
+  FaBlender,
+  FaLightbulb,
+  FaCar,
+  FaBolt,
+  FaLeaf,
+  FaShieldAlt,
+} from 'react-icons/fa';
 import { useIntersectionObserver } from '@hooks/useIntersectionObserver';
 
 /**
  * Home Page Component
+ * Enterprise-grade manufacturing company website
  */
 const Home: React.FC = () => {
-  const { targetRef: heroRef, isIntersecting: heroVisible } = useIntersectionObserver();
   const { targetRef: servicesRef, isIntersecting: servicesVisible } = useIntersectionObserver();
-  const { targetRef: statsRef, isIntersecting: statsVisible } = useIntersectionObserver();
 
   const services = [
     {
@@ -43,69 +68,340 @@ const Home: React.FC = () => {
     },
   ];
 
-  const stats = [
-    { value: '15+', label: 'Years Experience' },
-    { value: '500+', label: 'Projects Delivered' },
-    { value: '200+', label: 'Happy Clients' },
-    { value: '50+', label: 'Team Members' },
-  ];
-
   return (
     <div className="overflow-hidden">
       {/* Hero Section */}
-      <div
-        ref={heroRef}
-        className="relative min-h-screen flex items-center justify-center bg-gradient-to-br from-primary-900 via-primary-700 to-primary-600 text-white"
-      >
-        {/* Animated Background Pattern */}
-        <div className="absolute inset-0 opacity-10">
-          <div className="absolute top-0 left-0 w-96 h-96 bg-white rounded-full filter blur-3xl animate-pulse"></div>
-          <div className="absolute bottom-0 right-0 w-96 h-96 bg-white rounded-full filter blur-3xl animate-pulse delay-1000"></div>
-        </div>
+      <Hero
+        heading="Powering Growth"
+        subheading="Across Industries with Excellence & Innovation"
+        buttonText="Know More"
+        buttonLink="/about"
+        backgroundImage="/images/hero-image2.avif"
+      />
 
-        <Container className="relative z-10">
-          <div
-            className={`text-center max-w-4xl mx-auto transition-all duration-1000 ${
-              heroVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
-            }`}
-          >
-            <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold mb-6 leading-tight">
-              Innovation Meets
-              <span className="block text-accent-500">Excellence</span>
-            </h1>
-            <p className="text-xl md:text-2xl mb-8 text-gray-200 leading-relaxed">
-              We deliver enterprise-grade solutions that transform businesses and drive sustainable
-              growth across industries
-            </p>
-            <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-              <Link to={ROUTES.SERVICES}>
-                <Button size="lg" variant="primary">
-                  Explore Services
-                </Button>
-              </Link>
-              <Link to={ROUTES.CONTACT}>
-                <Button
-                  size="lg"
-                  variant="outline"
-                  className="bg-white text-primary-600 border-white hover:bg-gray-50"
-                >
-                  Contact Us
-                </Button>
-              </Link>
-            </div>
-          </div>
-        </Container>
+      {/* Who We Are Section */}
+      <WhoWeAre
+        label="WHO WE ARE"
+        heading="A Trusted Partner in Manufacturing & Innovation"
+        description="With decades of pioneering experience, we are a leading diversified manufacturing partner delivering comprehensive end-to-end solutions across industries. Our commitment to innovation, quality, and excellence empowers global and domestic brands to achieve their vision through cost-effective, scalable, and reliable manufacturing solutions."
+        buttonText="Learn More"
+        buttonLink="/about"
+        images={[
+          'https://images.unsplash.com/photo-1581092918056-0c4c3acd3789?w=600&h=400&fit=crop',
+          'https://images.unsplash.com/photo-1565043666747-69f6646db940?w=600&h=400&fit=crop',
+          'https://images.unsplash.com/photo-1537462715879-360eeb61a0ad?w=600&h=400&fit=crop',
+          'https://images.unsplash.com/photo-1581092160562-40aa08e78837?w=600&h=400&fit=crop',
+          'https://images.unsplash.com/photo-1581092580497-e0d23cbdf1dc?w=600&h=400&fit=crop',
+          'https://images.unsplash.com/photo-1504328345606-18bbc8c9d7d1?w=600&h=400&fit=crop',
+        ]}
+        stats={[
+          { value: '45+', label: 'Years Experience' },
+          { value: '60+', label: 'Global Brands' },
+        ]}
+      />
 
-        {/* Scroll Indicator */}
-        <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 animate-bounce">
-          <div className="w-6 h-10 border-2 border-white rounded-full flex items-start justify-center p-2">
-            <div className="w-1 h-3 bg-white rounded-full"></div>
-          </div>
-        </div>
-      </div>
+      {/* What We Do Section */}
+      <WhatWeDo
+        label="WHAT WE DO"
+        heading="Our Core Business Verticals"
+        subheading="Delivering end-to-end manufacturing excellence across diversified industry segments with proven capabilities and scale."
+        verticals={[
+          {
+            id: 'electronics-manufacturing',
+            title: 'Electronics Manufacturing Services',
+            description:
+              'Comprehensive EMS solutions from PCB assembly to complete product manufacturing for global and domestic brands.',
+            image:
+              'https://images.unsplash.com/photo-1581092918056-0c4c3acd3789?w=800&h=600&fit=crop',
+            link: '/business/electronics',
+          },
+          {
+            id: 'oem-odm',
+            title: 'OEM & ODM Solutions',
+            description:
+              'Turnkey manufacturing partnerships with design, engineering, and production capabilities across multiple categories.',
+            image:
+              'https://images.unsplash.com/photo-1565043666747-69f6646db940?w=800&h=600&fit=crop',
+            link: '/business/oem',
+          },
+          {
+            id: 'industrial-automation',
+            title: 'Industrial Automation & Engineering',
+            description:
+              'Advanced automation systems and precision engineering solutions for manufacturing process optimization.',
+            image:
+              'https://images.unsplash.com/photo-1581092160562-40aa08e78837?w=800&h=600&fit=crop',
+            link: '/business/automation',
+          },
+          {
+            id: 'supply-chain',
+            title: 'Supply Chain & Logistics',
+            description:
+              'Integrated supply chain management with warehousing, distribution, and just-in-time delivery capabilities.',
+            image:
+              'https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?w=800&h=600&fit=crop',
+            link: '/business/supply-chain',
+          },
+        ]}
+      />
+
+      {/* Why Choose Us Section */}
+      <WhyChooseUs
+        label="WHY US"
+        heading="Why Leading Brands Trust Us"
+        subheading="Decades of manufacturing excellence backed by scale, quality, and reliability. Our commitment to innovation and operational excellence makes us the preferred manufacturing partner for global and domestic brands."
+        strengths={[
+          {
+            id: 'manufacturing-scale',
+            icon: <FaIndustry className="text-4xl" />,
+            title: 'Large-Scale Manufacturing Capability',
+            description:
+              'State-of-the-art facilities with high-volume production capacity across multiple locations.',
+          },
+          {
+            id: 'oem-partnerships',
+            icon: <FaHandshake className="text-4xl" />,
+            title: 'Strong OEM Partnerships',
+            description:
+              'Trusted manufacturing partner for leading global brands with long-term strategic relationships.',
+          },
+          {
+            id: 'pan-india',
+            icon: <FaMapMarkedAlt className="text-4xl" />,
+            title: 'Pan-India Manufacturing Presence',
+            description:
+              'Strategically located facilities ensuring optimal logistics and regional market coverage.',
+          },
+          {
+            id: 'quality-compliance',
+            icon: <FaAward className="text-4xl" />,
+            title: 'Quality & Compliance Driven',
+            description:
+              'ISO certified processes with stringent quality controls and international standard compliance.',
+          },
+          {
+            id: 'leadership',
+            icon: <FaUserTie className="text-4xl" />,
+            title: 'Experienced Leadership Team',
+            description:
+              'Seasoned management and engineering professionals with deep industry expertise.',
+          },
+          {
+            id: 'certifications',
+            icon: <FaCertificate className="text-4xl" />,
+            title: 'Industry Certifications',
+            description:
+              'Comprehensive certifications ensuring adherence to global manufacturing standards.',
+          },
+        ]}
+        stats={[
+          { value: '15+', label: 'Manufacturing Units' },
+          { value: '20+', label: 'Years of Excellence' },
+          { value: '100+', label: 'Global Clients' },
+          { value: '5000+', label: 'Skilled Workforce' },
+        ]}
+      />
+
+      {/* Industries We Serve Section */}
+      <IndustriesWeServe
+        label="INDUSTRIES"
+        heading="Industries We Serve"
+        subheading="Delivering reliable and scalable manufacturing solutions across diverse industries with proven expertise and cutting-edge capabilities."
+        industries={[
+          {
+            id: 'consumer-electronics',
+            icon: <FaMobileAlt className="text-5xl" />,
+            title: 'Consumer Electronics',
+            description: 'Smartphones, wearables, smart devices',
+            image:
+              'https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?w=600&h=400&fit=crop',
+          },
+          {
+            id: 'home-appliances',
+            icon: <FaBlender className="text-5xl" />,
+            title: 'Home Appliances',
+            description: 'Washing machines, air conditioners, kitchen appliances',
+            image:
+              'https://images.unsplash.com/photo-1585659722983-3a675dabf23d?w=600&h=400&fit=crop',
+          },
+          {
+            id: 'lighting-electricals',
+            icon: <FaLightbulb className="text-5xl" />,
+            title: 'Lighting & Electricals',
+            description: 'LED lighting, electrical components',
+            image:
+              'https://images.unsplash.com/photo-1513828583688-c52646db42da?w=600&h=400&fit=crop',
+          },
+          {
+            id: 'automotive-ev',
+            icon: <FaCar className="text-5xl" />,
+            title: 'Automotive & EV Components',
+            description: 'Wiring systems, electronic modules',
+            image:
+              'https://images.unsplash.com/photo-1492144534655-ae79c964c9d7?w=600&h=400&fit=crop',
+          },
+          {
+            id: 'industrial-manufacturing',
+            icon: <FaIndustry className="text-5xl" />,
+            title: 'Industrial Manufacturing',
+            description: 'Heavy equipment, precision components',
+            image:
+              'https://images.unsplash.com/photo-1565043666747-69f6646db940?w=600&h=400&fit=crop',
+          },
+          {
+            id: 'energy-power',
+            icon: <FaBolt className="text-5xl" />,
+            title: 'Energy & Power Solutions',
+            description: 'Power electronics, sustainable energy systems',
+            image:
+              'https://images.unsplash.com/photo-1473341304170-971dccb5ac1e?w=600&h=400&fit=crop',
+          },
+        ]}
+      />
+
+      {/* Our Clients & Partners Section */}
+      <OurClients
+        label="CLIENTS & PARTNERS"
+        heading="Trusted by Global Industry Leaders"
+        subheading="Long-term partnerships with leading global and domestic brands across industries."
+        trustStatement="Serving global OEMs across consumer electronics, appliances, industrial systems, and power solutions."
+        industryTags={[
+          'Consumer Electronics',
+          'Home Appliances',
+          'Industrial Systems',
+          'Power & Energy',
+        ]}
+        grayscale={true}
+        clients={[
+          {
+            id: 'client-1',
+            name: 'Samsung',
+            logo: 'https://upload.wikimedia.org/wikipedia/commons/2/24/Samsung_Logo.svg',
+          },
+          {
+            id: 'client-2',
+            name: 'LG',
+            logo: 'https://upload.wikimedia.org/wikipedia/commons/b/bf/LG_logo_%282015%29.svg',
+          },
+          {
+            id: 'client-3',
+            name: 'Sony',
+            logo: 'https://upload.wikimedia.org/wikipedia/commons/c/ca/Sony_logo.svg',
+          },
+          {
+            id: 'client-4',
+            name: 'Panasonic',
+            logo: 'https://upload.wikimedia.org/wikipedia/commons/4/44/Panasonic_logo_%28Blue%29.svg',
+          },
+          {
+            id: 'client-5',
+            name: 'Bosch',
+            logo: 'https://upload.wikimedia.org/wikipedia/commons/1/16/Bosch-logo.svg',
+          },
+          {
+            id: 'client-6',
+            name: 'Philips',
+            logo: 'https://upload.wikimedia.org/wikipedia/commons/5/52/Philips_logo_new.svg',
+          },
+          {
+            id: 'client-7',
+            name: 'Haier',
+            logo: 'https://upload.wikimedia.org/wikipedia/commons/a/ab/Haier_logo.svg',
+          },
+          {
+            id: 'client-8',
+            name: 'Whirlpool',
+            logo: 'https://upload.wikimedia.org/wikipedia/commons/3/39/Whirlpool_logo.svg',
+          },
+          {
+            id: 'client-9',
+            name: 'Hitachi',
+            logo: 'https://upload.wikimedia.org/wikipedia/commons/7/78/Hitachi_logo.svg',
+          },
+          {
+            id: 'client-10',
+            name: 'Toshiba',
+            logo: 'https://upload.wikimedia.org/wikipedia/commons/1/19/Toshiba_logo.svg',
+          },
+          {
+            id: 'client-11',
+            name: 'Siemens',
+            logo: 'https://upload.wikimedia.org/wikipedia/commons/5/5f/Siemens-logo.svg',
+          },
+          {
+            id: 'client-12',
+            name: 'GE',
+            logo: 'https://upload.wikimedia.org/wikipedia/commons/f/ff/General_Electric_logo.svg',
+          },
+        ]}
+      />
+
+      {/* Sustainability / ESG Section */}
+      <Sustainability
+        label="SUSTAINABILITY"
+        heading="Sustainability & ESG"
+        subheading="We are committed to responsible growth by integrating environmental, social, and governance principles across our operations."
+        pillars={[
+          {
+            id: 'environmental',
+            icon: <FaLeaf className="text-4xl" />,
+            title: 'Environmental Responsibility',
+            points: [
+              'Energy-efficient manufacturing',
+              'Waste reduction & recycling',
+              'Sustainable sourcing practices',
+            ],
+          },
+          {
+            id: 'social',
+            icon: <FaUsers className="text-4xl" />,
+            title: 'Social Responsibility',
+            points: [
+              'Employee safety & well-being',
+              'Skill development & training',
+              'Community engagement initiatives',
+            ],
+          },
+          {
+            id: 'governance',
+            icon: <FaShieldAlt className="text-4xl" />,
+            title: 'Strong Governance',
+            points: [
+              'Ethical business practices',
+              'Compliance & transparency',
+              'Robust risk management',
+            ],
+          },
+        ]}
+        metrics={[
+          { value: '35%', label: 'Energy from sustainable sources' },
+          { value: '2,500+', label: 'Employees trained annually' },
+          { value: '100%', label: 'Compliance adherence' },
+        ]}
+        image="https://images.unsplash.com/photo-1497435334941-8c899ee9e8e9?w=1200&h=800&fit=crop"
+      />
+
+      {/* Careers CTA Section */}
+      <CareersCTA
+        label="CAREERS"
+        heading="Build Your Career With Us"
+        description="Join a team that is shaping the future of manufacturing, technology, and sustainable growth across industries."
+        highlights={[
+          'Long-term career growth',
+          'Learning & development programs',
+          'Safe & inclusive work environment',
+          'Exposure to global clients',
+        ]}
+        primaryButtonText="Explore Careers"
+        primaryButtonLink="/careers"
+        secondaryButtonText="View Open Positions"
+        secondaryButtonLink="/careers#openings"
+        image="https://images.unsplash.com/photo-1552664730-d307ca884978?w=1200&h=800&fit=crop"
+        backgroundColor="white"
+      />
 
       {/* Services Section */}
-      <Section background="white">
+     {/*  <Section background="gray">
         <Container>
           <div
             ref={servicesRef}
@@ -143,65 +439,10 @@ const Home: React.FC = () => {
             </Link>
           </div>
         </Container>
-      </Section>
-
-      {/* Stats Section */}
-      <Section background="primary">
-        <Container>
-          <div
-            ref={statsRef}
-            className={`grid grid-cols-2 md:grid-cols-4 gap-8 transition-all duration-1000 ${
-              statsVisible ? 'opacity-100 scale-100' : 'opacity-0 scale-95'
-            }`}
-          >
-            {stats.map((stat, index) => (
-              <div key={index} className="text-center">
-                <div className="text-5xl md:text-6xl font-bold text-primary-700 mb-2">
-                  {stat.value}
-                </div>
-                <div className="text-lg text-gray-700">{stat.label}</div>
-              </div>
-            ))}
-          </div>
-        </Container>
-      </Section>
-
-      {/* Why Choose Us Section */}
-      <Section background="gray">
-        <Container>
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-            <div>
-              <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6">Why Choose Us?</h2>
-              <p className="text-lg text-gray-600 mb-6 leading-relaxed">
-                We combine deep industry expertise with innovative technology to deliver solutions
-                that drive measurable business outcomes.
-              </p>
-              <ul className="space-y-4">
-                {[
-                  'Proven track record of successful implementations',
-                  'Experienced team of industry experts',
-                  'Customer-centric approach to solution design',
-                  'Scalable and future-ready architectures',
-                  '24/7 dedicated support and maintenance',
-                ].map((item, index) => (
-                  <li key={index} className="flex items-start">
-                    <FaAward className="text-primary-600 mt-1 mr-3 flex-shrink-0" />
-                    <span className="text-gray-700">{item}</span>
-                  </li>
-                ))}
-              </ul>
-            </div>
-            <div className="relative">
-              <div className="aspect-square bg-gradient-to-br from-primary-400 to-primary-600 rounded-2xl shadow-2xl flex items-center justify-center">
-                <FaGlobeAmericas className="text-white text-9xl opacity-20" />
-              </div>
-            </div>
-          </div>
-        </Container>
-      </Section>
+      </Section> */}
 
       {/* CTA Section */}
-      <Section background="white">
+      {/* <Section background="gray">
         <Container>
           <div className="bg-gradient-to-r from-primary-600 to-primary-800 rounded-2xl p-12 text-center text-white shadow-2xl">
             <h2 className="text-4xl md:text-5xl font-bold mb-4">Ready to Get Started?</h2>
@@ -215,7 +456,7 @@ const Home: React.FC = () => {
             </Link>
           </div>
         </Container>
-      </Section>
+      </Section> */}
     </div>
   );
 };

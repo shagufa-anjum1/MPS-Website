@@ -5,7 +5,7 @@ import Input from '@components/Input/Input';
 import Textarea from '@components/Textarea/Textarea';
 import Button from '@components/Button/Button';
 import { useApi } from '@hooks/useApi';
-import contactService from '@services/contact.service';
+import contactService from '@/hooks/services/contact.service';
 import { ContactFormData } from '@types/index';
 import { isValidEmail, isValidPhone, isRequired } from '@utils/validators';
 import { FaEnvelope, FaPhone, FaMapMarkerAlt } from 'react-icons/fa';

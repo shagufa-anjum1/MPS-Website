@@ -20,12 +20,13 @@
       "@/*": ["./src/*"],
       "@components/*": ["./src/components/*"],
       "@pages/*": ["./src/pages/*"],
-      "@services/*": ["./src/services/*"],
+      "@services/*": ["src/hooks/services/*"],
       "@hooks/*": ["./src/hooks/*"],
       "@utils/*": ["./src/utils/*"],
       "@types/*": ["./src/types/*"],
       "@assets/*": ["./src/assets/*"],
-      "@layouts/*": ["./src/layouts/*"]
+      "@layouts/*": ["./src/layouts/*"],
+      "@config/*": ["./src/config/*"]
     }
   },
   "include": ["src"],

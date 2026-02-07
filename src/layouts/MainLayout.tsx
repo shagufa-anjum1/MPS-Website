@@ -13,11 +13,23 @@ const MainLayout: React.FC = () => {
 
   return (
     <div className="flex flex-col min-h-screen">
+      {/* Header */}
       <Header />
-      <main className="flex-grow pt-20">
+
+      {/* Main Content */}
+      <main className="flex-grow">
         <Outlet />
       </main>
-      <Footer />
+
+      {/* Footer */}
+      <Footer
+        companyName="MPS Enterprise"
+        companyDescription="A leading manufacturing and technology-driven organization delivering scalable solutions across industries."
+        headquarterCity="New Delhi, India"
+        address="Corporate Office, New Delhi, India"
+        email="info@mbgenterprise.com"
+        phone="+91 11 4567 8900"
+      />
     </div>
   );
 };

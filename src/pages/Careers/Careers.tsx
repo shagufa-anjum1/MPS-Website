@@ -4,7 +4,7 @@ import Section from '@components/Section/Section';
 import Card from '@components/Card/Card';
 import Loading from '@components/Loading/Loading';
 import { useApi } from '@hooks/useApi';
-import careerService from '@services/career.service';
+import careerService from '@/hooks/services/career.service';
 import { JobPosting } from '@types/index';
 import { FaBriefcase, FaMapMarkerAlt, FaClock } from 'react-icons/fa';
 
