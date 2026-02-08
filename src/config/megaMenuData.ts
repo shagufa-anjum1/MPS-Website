@@ -1,4 +1,4 @@
-import { NavigationConfig } from '@types/megaMenu.types';
+import { NavigationConfig } from '../types/megaMenu.types'
 
 /**
  * Mega Menu Navigation Configuration

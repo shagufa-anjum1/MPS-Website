@@ -7,6 +7,9 @@ import Services from '@pages/Services/Services';
 import Industries from '@pages/Industries/Industries';
 import Contact from '@pages/Contact/Contact';
 import Careers from '@pages/Careers/Careers';
+import StoryPage from '@pages/About/story'
+import LegacyPage from '@pages/About/legacy'
+import MobilePhonesPage from "@pages/Bussiness/MobilePhones"
 import { ROUTES } from '@utils/constants';
 
 /**
@@ -41,6 +44,18 @@ const router = createBrowserRouter([
         path: ROUTES.CAREERS,
         element: <Careers />,
       },
+      {
+        path: ROUTES.STORY,
+        element: <StoryPage />
+      },
+      {
+        path: ROUTES.OUR_LEGACY,
+        element: <LegacyPage />
+      },
+      {
+        path: ROUTES.MOBILE_PHONES,
+        element: <MobilePhonesPage />
+      }
     ],
   },
 ]);
