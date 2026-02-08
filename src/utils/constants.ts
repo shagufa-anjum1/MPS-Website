@@ -7,6 +7,9 @@ export const ROUTES = {
   INDUSTRIES: '/industries',
   CONTACT: '/contact',
   CAREERS: '/careers',
+  STORY: '/about/story',
+  OUR_LEGACY: '/about/legacy',
+  MOBILE_PHONES: '/business/mobile',
 } as const;
 
 export const SOCIAL_LINKS = {
