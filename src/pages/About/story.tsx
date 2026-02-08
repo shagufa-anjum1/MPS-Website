@@ -1,484 +1,666 @@
-// src/pages/About/story.tsx - Fixed for React Router Outlet
 import React from 'react';
 
-// Inline Components with proper TypeScript types
-interface ContainerProps {
-  children: React.ReactNode;
-  className?: string;
-}
-
-const Container: React.FC<ContainerProps> = ({ children, className = '' }) => (
-  <div className={`max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 ${className}`}>{children}</div>
-);
-
-interface SectionProps {
-  children: React.ReactNode;
-  className?: string;
-}
-
-const Section = React.forwardRef<HTMLElement, SectionProps>(({ children, className = '' }, ref) => (
-  <section ref={ref} className={`w-full py-20 ${className}`}>
-    {children}
-  </section>
-));
-Section.displayName = 'Section';
-
-const StoryPage: React.FC = () => {
-  const heroRef = React.useRef<HTMLElement>(null);
-  const journeyRef = React.useRef<HTMLElement>(null);
-  const valuesRef = React.useRef<HTMLElement>(null);
-  const statsRef = React.useRef<HTMLElement>(null);
-
-  const [heroVisible, setHeroVisible] = React.useState(false);
-  const [journeyVisible, setJourneyVisible] = React.useState(false);
-  const [valuesVisible, setValuesVisible] = React.useState(false);
-  const [statsVisible, setStatsVisible] = React.useState(false);
-
-  // Intersection Observer Setup
-  React.useEffect(() => {
-    const observerOptions = { threshold: 0.1 };
-
-    const heroObserver = new IntersectionObserver(([entry]) => {
-      setHeroVisible(entry.isIntersecting);
-    }, observerOptions);
-
-    const journeyObserver = new IntersectionObserver(([entry]) => {
-      setJourneyVisible(entry.isIntersecting);
-    }, observerOptions);
-
-    const valuesObserver = new IntersectionObserver(([entry]) => {
-      setValuesVisible(entry.isIntersecting);
-    }, observerOptions);
-
-    const statsObserver = new IntersectionObserver(([entry]) => {
-      setStatsVisible(entry.isIntersecting);
-    }, observerOptions);
-
-    if (heroRef.current) heroObserver.observe(heroRef.current);
-    if (journeyRef.current) journeyObserver.observe(journeyRef.current);
-    if (valuesRef.current) valuesObserver.observe(valuesRef.current);
-    if (statsRef.current) statsObserver.observe(statsRef.current);
-
-    return () => {
-      heroObserver.disconnect();
-      journeyObserver.disconnect();
-      valuesObserver.disconnect();
-      statsObserver.disconnect();
-    };
-  }, []);
-
-  const coreValues = [
-    {
-      title: 'Quality',
-      description: 'We deliver top-tier performance with no compromises.',
-      icon: '⭐',
-    },
-    {
-      title: 'Innovation',
-      description: 'We use advanced technology for next-generation solutions.',
-      icon: '💡',
-    },
-    {
-      title: 'Customer Focus',
-      description: 'We understand your needs and deliver beyond expectations.',
-      icon: '🎯',
-    },
-    {
-      title: 'Trust',
-      description: 'We build lasting partnerships through reliability.',
-      icon: '🤝',
-    },
-  ];
-
-  const journeyMilestones = [
-    {
-      year: '2015',
-      title: 'Foundation',
-      desc: 'Precision enclosures manufacturing founded in Delhi',
-      highlight: true,
-    },
-    {
-      year: '2018',
-      title: 'Scale Achievement',
-      desc: 'Injection molding for leading smartphone OEMs',
-      highlight: false,
-    },
-    {
-      year: '2021',
-      title: 'CNC Excellence',
-      desc: 'Advanced aluminum device body manufacturing launched',
-      highlight: false,
-    },
-    {
-      year: '2024',
-      title: 'Global Expansion',
-      desc: '50M+ units exported to international markets',
-      highlight: true,
-    },
-    {
-      year: '2026',
-      title: 'Smart Factory',
-      desc: 'AI-powered production systems deployment',
-      highlight: false,
-    },
-  ];
-
-  const statsData = [
-    { label: 'Brands Trust Our Expertise', value: '75+', icon: '🏆' },
-    { label: 'Manufacturing Facilities', value: '3', icon: '🏭' },
-    { label: 'R&D Innovation Centers', value: '2', icon: '🔬' },
-    { label: 'Dedicated Employees', value: '5,000+', icon: '👥' },
-    { label: 'Device Bodies Manufactured', value: '50M+', icon: '📱' },
-    { label: 'Years of Excellence', value: '11+', icon: '⏱️' },
-    { label: 'Manufacturing Space (sq.ft)', value: '500K+', icon: '📐' },
-    { label: 'Quality Certifications', value: '12+', icon: '✅' },
-  ];
-
-  const capabilities = [
-    {
-      icon: '📱',
-      title: 'Smartphone Casings',
-      desc: 'High-volume injection molding for consumer electronics',
-    },
-    {
-      icon: '⌚',
-      title: 'Wearable Devices',
-      desc: 'Micro-precision CNC aluminum enclosures',
-    },
-    {
-      icon: '🔌',
-      title: 'IoT Device Bodies',
-      desc: 'Custom PCB housings and smart device enclosures',
-    },
-    {
-      icon: '⚙️',
-      title: 'Precision Components',
-      desc: 'Anodized magnesium and aluminum parts',
-    },
-  ];
-
+const OurStoryPage: React.FC = () => {
   return (
-    <div className="w-full">
-      {/* Hero Section */}
-      <Section
-        ref={heroRef}
-        className={`overflow-hidden transition-all duration-1000 bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-50 ${
-          heroVisible ? 'opacity-100 scale-100' : 'opacity-0 scale-105'
-        }`}
+    <div className="min-h-screen bg-white text-gray-900">
+      {/* 1. Page Hero */}
+      <section
+        className="relative h-screen bg-cover bg-center flex items-center justify-center text-center text-white overflow-hidden"
+        style={{
+          backgroundImage:
+            "linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.5)), url('https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?ixlib=rb-4.0.3&auto=format&fit=crop&w=2500&q=85')",
+        }}
       >
-        <Container>
-          <div className="min-h-[80vh] flex items-center justify-center text-center px-4">
-            <div className="max-w-5xl">
-              <div className="mb-8">
-                <span className="inline-block px-6 py-3 bg-blue-100 text-blue-800 rounded-full text-sm font-bold tracking-wide mb-6">
-                  OUR STORY
-                </span>
+        <div className="absolute inset-0 bg-black bg-opacity-50 z-0"></div>
+        <div className="relative z-10 max-w-5xl mx-auto px-4">
+          <span className="inline-block px-5 py-2 bg-white/20 backdrop-blur-md text-sm uppercase tracking-widest font-semibold rounded-full mb-8 border border-white/30">
+            Our Story
+          </span>
+          <h1 className="text-5xl md:text-7xl lg:text-8xl font-black mb-8 leading-tight drop-shadow-2xl">
+            Three Decades of
+            <br />
+            Manufacturing Excellence
+          </h1>
+          <p className="text-xl md:text-2xl max-w-3xl mx-auto leading-relaxed font-medium opacity-95">
+            From humble beginnings in 1993 to India's trusted partner for global electronics brands
+          </p>
+        </div>
+      </section>
+
+      {/* 2. Origins / Foundation */}
+      <section className="py-32 px-4 md:px-8 lg:px-16 max-w-7xl mx-auto">
+        <div className="grid md:grid-cols-2 gap-20 items-center">
+          <div className="relative group order-2 md:order-1">
+            <img
+              src="https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?ixlib=rb-4.0.3&auto=format&fit=crop&w=2200&q=85"
+              alt="MPS Electronics founding facility - 1993"
+              className="w-full h-[500px] lg:h-[600px] object-cover rounded-3xl shadow-2xl group-hover:shadow-3xl group-hover:scale-[1.02] transition-all duration-700"
+            />
+            <div className="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 rounded-3xl"></div>
+          </div>
+
+          <div className="order-1 md:order-2">
+            <div className="inline-block px-4 py-2 bg-blue-100 text-blue-700 text-sm font-bold uppercase tracking-wider rounded-full mb-6">
+              1993 - Where It All Began
+            </div>
+            <h2 className="text-4xl md:text-5xl lg:text-6xl font-black mb-8 text-gray-900 leading-tight">
+              Built on Engineering Excellence
+            </h2>
+            <p className="text-xl md:text-2xl leading-relaxed text-gray-700 mb-6">
+              Established by industry veterans with 20+ years expertise, MPS Electronics started
+              with a clear mission: deliver precision-engineered electronic enclosures that meet the
+              stringent demands of global manufacturers.
+            </p>
+            <p className="text-lg md:text-xl text-gray-600 leading-relaxed">
+              What began as a single facility focused on injection molding has evolved into India's
+              leading electronics body manufacturing enterprise—built deliberately, one quality
+              component at a time.
+            </p>
+            <div className="mt-10 w-24 h-2 bg-gradient-to-r from-blue-600 to-indigo-600 rounded-full"></div>
+          </div>
+        </div>
+      </section>
+
+      {/* 3. Growth Timeline */}
+      <section className="py-32 px-4 md:px-8 lg:px-16 bg-gradient-to-br from-gray-50 to-blue-50/30">
+        <div className="max-w-5xl mx-auto">
+          <div className="text-center mb-20">
+            <div className="inline-block px-4 py-2 bg-indigo-100 text-indigo-700 text-sm font-bold uppercase tracking-wider rounded-full mb-6">
+              Our Journey
+            </div>
+            <h2 className="text-4xl md:text-5xl lg:text-6xl font-black mb-6 text-gray-900">
+              Three Decades of Deliberate Growth
+            </h2>
+            <p className="text-xl text-gray-700 max-w-3xl mx-auto">
+              Not built overnight—scaled responsibly through operational excellence
+            </p>
+          </div>
+
+          <div className="space-y-16">
+            {[
+              {
+                year: '1993',
+                title: 'Foundation',
+                desc: 'Started with precision injection molding for domestic electronics brands',
+              },
+              {
+                year: '2005',
+                title: 'Global Partnerships',
+                desc: 'Secured first international clients, proving India-scale capability',
+              },
+              {
+                year: '2015',
+                title: 'Multi-Facility Expansion',
+                desc: 'Scaled to 12+ state-of-the-art plants with advanced automation',
+              },
+              {
+                year: '2026',
+                title: 'Industry Leadership',
+                desc: '150+ global clients, 35K+ employees, unmatched manufacturing scale',
+              },
+            ].map((milestone, idx) => (
+              <div key={idx} className="flex items-start gap-8 group">
+                <div className="flex-shrink-0 w-32 h-32 bg-gradient-to-br from-blue-600 to-indigo-600 rounded-2xl flex items-center justify-center text-3xl font-black text-white shadow-xl group-hover:scale-105 transition-transform duration-500">
+                  {milestone.year}
+                </div>
+                <div className="pt-4">
+                  <h3 className="text-2xl md:text-3xl font-black text-gray-900 mb-3">
+                    {milestone.title}
+                  </h3>
+                  <p className="text-xl text-gray-700 leading-relaxed">{milestone.desc}</p>
+                </div>
               </div>
-              <h1 className="text-5xl md:text-7xl lg:text-8xl font-black mb-8 bg-gradient-to-r from-gray-900 via-blue-900 to-slate-900 bg-clip-text text-transparent leading-tight">
-                Leading Innovation in Electronics Manufacturing
-              </h1>
-              <p className="text-xl md:text-2xl text-gray-700 mb-12 max-w-4xl mx-auto leading-relaxed">
-                A leading electronics manufacturing powerhouse, driving innovation in consumer
-                electronics and telecommunications. Engineering durable device bodies with
-                micron-level precision since 2015.
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* 4. Manufacturing Philosophy */}
+      <section className="py-32 px-4 md:px-8 lg:px-16 bg-white">
+        <div className="max-w-7xl mx-auto">
+          <div className="grid md:grid-cols-2 gap-20 items-center">
+            <div>
+              <div className="inline-block px-4 py-2 bg-emerald-100 text-emerald-700 text-sm font-bold uppercase tracking-wider rounded-full mb-6">
+                Our Approach
+              </div>
+              <h2 className="text-4xl md:text-5xl lg:text-6xl font-black mb-8 text-gray-900 leading-tight">
+                Engineering-First Manufacturing
+              </h2>
+              <p className="text-xl md:text-2xl text-gray-700 leading-relaxed mb-8">
+                We don't just manufacture—we engineer solutions. Every enclosure is designed with
+                precision tolerances, thermal management, and real-world durability in mind.
               </p>
-              <div className="flex flex-col sm:flex-row gap-6 justify-center items-center">
-                <a
-                  href="/services"
-                  className="inline-block bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 text-white px-12 py-5 rounded-2xl font-bold text-lg shadow-2xl hover:shadow-3xl transform hover:-translate-y-1 transition-all duration-300"
-                >
-                  Explore Our Capabilities
-                </a>
-                <a
-                  href="/contact"
-                  className="inline-block border-2 border-blue-600 text-blue-600 hover:bg-blue-600 hover:text-white px-12 py-5 rounded-2xl font-bold text-lg shadow-lg hover:shadow-xl transform hover:-translate-y-1 transition-all duration-300"
-                >
-                  Get Manufacturing Quote
-                </a>
+
+              <div className="space-y-6">
+                <div className="flex items-start gap-4 p-6 bg-gray-50 rounded-2xl border border-gray-200 hover:border-blue-300 transition-colors">
+                  <div className="flex-shrink-0 w-16 h-16 bg-blue-600 rounded-xl flex items-center justify-center">
+                    <svg
+                      className="w-8 h-8 text-white"
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth={2}
+                        d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4"
+                      />
+                    </svg>
+                  </div>
+                  <div>
+                    <h4 className="text-xl font-bold text-gray-900 mb-2">Zero-Defect Culture</h4>
+                    <p className="text-gray-700">
+                      100% inspection protocols at every production stage
+                    </p>
+                  </div>
+                </div>
+
+                <div className="flex items-start gap-4 p-6 bg-gray-50 rounded-2xl border border-gray-200 hover:border-emerald-300 transition-colors">
+                  <div className="flex-shrink-0 w-16 h-16 bg-emerald-600 rounded-xl flex items-center justify-center">
+                    <svg
+                      className="w-8 h-8 text-white"
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth={2}
+                        d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4"
+                      />
+                    </svg>
+                  </div>
+                  <div>
+                    <h4 className="text-xl font-bold text-gray-900 mb-2">Process Optimization</h4>
+                    <p className="text-gray-700">
+                      Continuous improvement driven by data and lean principles
+                    </p>
+                  </div>
+                </div>
+
+                <div className="flex items-start gap-4 p-6 bg-gray-50 rounded-2xl border border-gray-200 hover:border-purple-300 transition-colors">
+                  <div className="flex-shrink-0 w-16 h-16 bg-purple-600 rounded-xl flex items-center justify-center">
+                    <svg
+                      className="w-8 h-8 text-white"
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth={2}
+                        d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"
+                      />
+                    </svg>
+                  </div>
+                  <div>
+                    <h4 className="text-xl font-bold text-gray-900 mb-2">People-Centric</h4>
+                    <p className="text-gray-700">
+                      35K+ skilled workforce empowered with continuous training
+                    </p>
+                  </div>
+                </div>
               </div>
             </div>
-          </div>
-        </Container>
-      </Section>
 
-      {/* Core Values Section */}
-      <Section className="bg-white py-24">
-        <Container>
-          <div className="text-center mb-20">
-            <h2 className="text-4xl md:text-5xl font-black text-gray-900 mb-6">Our Core Values</h2>
-            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-              The principles that guide every decision and innovation
-            </p>
-          </div>
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
-            {coreValues.map((value, i) => (
-              <div
-                key={i}
-                className="group p-8 bg-gradient-to-br from-white to-blue-50 rounded-3xl shadow-lg hover:shadow-2xl hover:-translate-y-2 transition-all duration-500 border border-gray-100 hover:border-blue-200"
-              >
-                <div className="text-5xl mb-6 transform group-hover:scale-110 transition-transform duration-300">
-                  {value.icon}
-                </div>
-                <h3 className="text-2xl font-bold text-gray-900 mb-4 group-hover:text-blue-600 transition-colors">
-                  {value.title}
-                </h3>
-                <p className="text-gray-600 leading-relaxed">{value.description}</p>
-              </div>
-            ))}
-          </div>
-        </Container>
-      </Section>
-
-      {/* Journey Timeline */}
-      <Section
-        ref={journeyRef}
-        className={`bg-gradient-to-b from-slate-50 to-white py-24 transition-all duration-1000 ${
-          journeyVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-12'
-        }`}
-      >
-        <Container>
-          <div className="text-center mb-20">
-            <h2 className="text-4xl md:text-6xl font-black mb-8 bg-gradient-to-r from-slate-900 to-blue-900 bg-clip-text text-transparent">
-              Our Precision Journey
-            </h2>
-            <p className="text-xl md:text-2xl text-gray-600 max-w-3xl mx-auto">
-              From Delhi workshops to powering global electronics OEMs
-            </p>
-          </div>
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
-            {journeyMilestones.map((item, i) => (
-              <div
-                key={i}
-                className={`group p-10 rounded-3xl shadow-xl hover:shadow-2xl hover:-translate-y-4 transition-all duration-500 border overflow-hidden ${
-                  item.highlight
-                    ? 'bg-gradient-to-br from-blue-600 to-indigo-700 border-blue-400 text-white'
-                    : 'bg-white/90 backdrop-blur-md border-gray-100 hover:border-blue-200 hover:bg-gradient-to-br hover:from-blue-50 hover:to-indigo-50'
-                }`}
-              >
-                <div
-                  className={`w-20 h-20 rounded-2xl flex items-center justify-center text-2xl font-black mb-8 shadow-2xl group-hover:scale-110 transition-all duration-300 mx-auto ${
-                    item.highlight
-                      ? 'bg-white/20 text-white backdrop-blur-lg'
-                      : 'bg-gradient-to-r from-blue-500 to-cyan-500 text-white'
-                  }`}
-                >
-                  {item.year}
-                </div>
-                <h3
-                  className={`text-2xl md:text-3xl font-bold mb-6 transition-all duration-300 ${
-                    item.highlight ? 'text-white' : 'text-gray-900 group-hover:text-blue-600'
-                  }`}
-                >
-                  {item.title}
-                </h3>
-                <p
-                  className={`text-lg leading-relaxed ${
-                    item.highlight ? 'text-blue-100' : 'text-gray-600 group-hover:text-gray-800'
-                  }`}
-                >
-                  {item.desc}
-                </p>
-              </div>
-            ))}
-          </div>
-        </Container>
-      </Section>
-
-      {/* Manufacturing Capabilities */}
-      <Section className="bg-white py-24">
-        <Container>
-          <div className="text-center mb-20">
-            <h2 className="text-4xl md:text-6xl font-black text-gray-900 mb-8">
-              Device Body Expertise
-            </h2>
-            <p className="text-xl md:text-2xl text-gray-600 max-w-3xl mx-auto">
-              End-to-end manufacturing precision for global brands
-            </p>
-          </div>
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
-            {capabilities.map((cap, i) => (
-              <div
-                key={i}
-                className="group p-10 text-center rounded-3xl bg-gradient-to-br from-white to-slate-50 shadow-lg hover:shadow-2xl hover:-translate-y-3 transition-all duration-500 border border-gray-100 hover:border-blue-300 hover:from-blue-50 hover:to-indigo-50 cursor-pointer"
-              >
-                <div className="text-6xl mb-8 mx-auto group-hover:scale-110 transition-transform duration-300">
-                  {cap.icon}
-                </div>
-                <h3 className="text-2xl font-bold text-gray-900 mb-6 group-hover:text-blue-600 transition-colors">
-                  {cap.title}
-                </h3>
-                <p className="text-gray-600 font-medium text-lg leading-relaxed">{cap.desc}</p>
-              </div>
-            ))}
-          </div>
-        </Container>
-      </Section>
-
-      {/* Stats Snapshot */}
-      <Section
-        ref={statsRef}
-        className={`bg-gradient-to-br from-slate-900 via-blue-950 to-indigo-950 py-32 transition-all duration-1000 ${
-          statsVisible ? 'opacity-100' : 'opacity-0'
-        }`}
-      >
-        <Container>
-          <div className="text-center mb-20">
-            <h2 className="text-4xl md:text-6xl font-black text-white mb-8">
-              A Snapshot of Our Scale and Impact
-            </h2>
-            <p className="text-xl text-blue-200 max-w-3xl mx-auto">
-              Delivering excellence across every metric that matters
-            </p>
-          </div>
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
-            {statsData.map((stat, i) => (
-              <div
-                key={i}
-                className="group p-10 bg-white/10 backdrop-blur-lg rounded-3xl shadow-2xl hover:shadow-3xl hover:-translate-y-4 transition-all duration-700 border border-white/20 hover:border-white/40 hover:bg-white/15 text-center"
-              >
-                <div className="text-5xl mb-6 group-hover:scale-110 transition-transform">
-                  {stat.icon}
-                </div>
-                <div className="text-5xl md:text-6xl font-black text-transparent bg-clip-text bg-gradient-to-r from-white via-blue-200 to-cyan-200 mb-4 group-hover:scale-105 transition-all">
-                  {stat.value}
-                </div>
-                <div className="text-lg font-bold text-blue-100 tracking-wide">{stat.label}</div>
-              </div>
-            ))}
-          </div>
-        </Container>
-      </Section>
-
-      {/* Vision & Mission */}
-      <Section
-        ref={valuesRef}
-        className={`bg-gradient-to-b from-white to-slate-50 py-24 transition-all duration-1000 ${
-          valuesVisible ? 'opacity-100' : 'opacity-0'
-        }`}
-      >
-        <Container>
-          <div className="grid md:grid-cols-2 gap-16 max-w-6xl mx-auto">
-            <div className="group p-12 bg-white rounded-3xl shadow-xl hover:shadow-2xl transition-all duration-500 border border-gray-100 hover:border-blue-200">
-              <div className="text-5xl mb-8">🎯</div>
-              <h3 className="text-3xl md:text-4xl font-black text-gray-900 mb-8 group-hover:text-blue-600 transition-colors">
-                Our Vision
-              </h3>
-              <p className="text-lg text-gray-700 leading-relaxed">
-                To redefine the future of electronics manufacturing by becoming the most trusted
-                innovation partner for global brands — known for precision, sustainability, and
-                transformative impact across industries.
-              </p>
-            </div>
-            <div className="group p-12 bg-gradient-to-br from-blue-600 to-indigo-700 rounded-3xl shadow-xl hover:shadow-2xl transition-all duration-500 text-white">
-              <div className="text-5xl mb-8">🚀</div>
-              <h3 className="text-3xl md:text-4xl font-black mb-8">Our Mission</h3>
-              <p className="text-lg text-blue-100 leading-relaxed mb-6">
-                We exist to empower innovation at scale by delivering cutting-edge manufacturing
-                solutions with integrity, intelligence, and impact.
-              </p>
-              <ul className="space-y-4 text-blue-50">
-                <li className="flex items-start">
-                  <span className="mr-3 text-xl">✓</span>
-                  <span>Customer-Centric Excellence through reliable, future-ready solutions</span>
-                </li>
-                <li className="flex items-start">
-                  <span className="mr-3 text-xl">✓</span>
-                  <span>Precision Without Compromise with zero-defect manufacturing</span>
-                </li>
-                <li className="flex items-start">
-                  <span className="mr-3 text-xl">✓</span>
-                  <span>Purpose-Driven Impact for sustainable manufacturing practices</span>
-                </li>
-              </ul>
+            <div className="relative group">
+              <img
+                src="https://images.unsplash.com/photo-1565120130276-dfbd9a7a3ad7?ixlib=rb-4.0.3&auto=format&fit=crop&w=2200&q=85"
+                alt="MPS Electronics quality control and precision engineering"
+                className="w-full h-[600px] object-cover rounded-3xl shadow-2xl group-hover:shadow-3xl group-hover:scale-[1.02] transition-all duration-700"
+              />
+              <div className="absolute -bottom-8 -right-8 w-64 h-64 bg-gradient-to-br from-emerald-500 to-blue-600 rounded-3xl -z-10 opacity-20 group-hover:opacity-30 transition-opacity duration-500"></div>
             </div>
           </div>
-        </Container>
-      </Section>
+        </div>
+      </section>
 
-      {/* Innovation Hub CTA */}
-      <Section className="bg-gradient-to-br from-indigo-600 via-blue-700 to-cyan-600 text-white py-32">
-        <Container>
-          <div className="text-center max-w-4xl mx-auto">
-            <div className="text-6xl mb-8">🔬</div>
-            <h2 className="text-5xl md:text-6xl font-black mb-8">
-              Step Into Our World of Innovation
+      {/* 5. Manufacturing Capabilities - Horizontal Scroll */}
+      <section className="py-32 px-4 md:px-8 lg:px-16 bg-gradient-to-br from-slate-900 via-gray-900 to-black text-white overflow-hidden">
+        <div className="max-w-7xl mx-auto">
+          <div className="text-center mb-16">
+            <div className="inline-block px-4 py-2 bg-blue-500/20 text-blue-300 text-sm font-bold uppercase tracking-wider rounded-full mb-6 border border-blue-400/30">
+              Our Capabilities
+            </div>
+            <h2 className="text-4xl md:text-5xl lg:text-6xl font-black mb-6 leading-tight drop-shadow-2xl">
+              20+ Advanced Manufacturing Processes
             </h2>
-            <p className="text-xl md:text-2xl mb-12 text-blue-100 leading-relaxed max-w-3xl mx-auto">
-              Discover the forefront of innovation at our hub, where groundbreaking technologies and
-              creative solutions converge. Join us in shaping the next wave of excellence.
+            <p className="text-xl md:text-2xl text-gray-300 max-w-3xl mx-auto leading-relaxed">
+              Injection molding to final inspection—complete in-house capabilities
             </p>
-            <a
-              href="/innovation"
-              className="inline-block bg-white text-blue-700 hover:bg-blue-50 px-16 py-6 rounded-3xl font-bold text-xl shadow-2xl hover:shadow-3xl transform hover:-translate-y-2 transition-all duration-500"
+          </div>
+
+          <div className="relative">
+            <div
+              className="flex overflow-x-auto gap-6 pb-6 snap-x snap-mandatory scrollbar-hide"
+              style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
             >
-              Explore Innovation Hub →
-            </a>
-          </div>
-        </Container>
-      </Section>
+              {/* Capability Cards */}
+              {[
+                {
+                  img: 'photo-1565120130276-dfbd9a7a3ad7',
+                  title: 'Injection Molding',
+                  desc: 'High-precision plastic enclosure production',
+                },
+                {
+                  img: 'photo-1565098772267-60af42b81ef2',
+                  title: 'CNC Machining',
+                  desc: 'Precision metal component fabrication',
+                },
+                {
+                  img: 'photo-1581092160607-ee67e7d149e7',
+                  title: 'Die Casting',
+                  desc: 'Aluminum & zinc alloy body manufacturing',
+                },
+                {
+                  img: 'photo-1581091226825-a6a2a5aee158',
+                  title: 'Assembly Lines',
+                  desc: 'Automated production workflows',
+                },
+                {
+                  img: 'photo-1532094349884-543bc11b234d',
+                  title: 'Quality Testing',
+                  desc: 'Rigorous inspection & validation',
+                },
+                {
+                  img: 'photo-1588415025481-17d6c4f50c4d',
+                  title: 'Laser Cutting',
+                  desc: 'Precision metal sheet fabrication',
+                },
+                {
+                  img: 'photo-1621905251918-48416bd8575a',
+                  title: 'Surface Treatment',
+                  desc: 'Coating, plating & finishing',
+                },
+                {
+                  img: 'photo-1581092160562-40aa08e78837',
+                  title: 'Robotic Welding',
+                  desc: 'Automated high-precision joining',
+                },
+                {
+                  img: 'photo-1584448062084-75ad6a5aa8b3',
+                  title: 'Tool & Die Making',
+                  desc: 'Custom mold design & fabrication',
+                },
+                {
+                  img: 'photo-1513828583688-c52646db42da',
+                  title: 'Powder Coating',
+                  desc: 'Durable & eco-friendly finish',
+                },
+                {
+                  img: 'photo-1581092921461-eab62e97a780',
+                  title: 'Metal Stamping',
+                  desc: 'High-volume component production',
+                },
+                {
+                  img: 'photo-1606085831792-6f56b0c87e2e',
+                  title: '3D Prototyping',
+                  desc: 'Rapid design validation & testing',
+                },
+                {
+                  img: 'photo-1518770660439-4636190af475',
+                  title: 'PCB Assembly',
+                  desc: 'Electronic component integration',
+                },
+                {
+                  img: 'photo-1586528116311-ad8dd3c8310d',
+                  title: 'Smart Warehouse',
+                  desc: 'Automated storage & logistics',
+                },
+                {
+                  img: 'photo-1581091870621-191a66d463d3',
+                  title: 'Extrusion Molding',
+                  desc: 'Continuous profile manufacturing',
+                },
+                {
+                  img: 'photo-1581093458791-9d42e2370e3b',
+                  title: 'Paint Booth',
+                  desc: 'Precision spray painting facility',
+                },
+                {
+                  img: 'photo-1587293852726-70cdb56c2866',
+                  title: 'Material Handling',
+                  desc: 'Automated conveyor systems',
+                },
+                {
+                  img: 'photo-1581092582537-48e08cce1e7b',
+                  title: 'Vacuum Forming',
+                  desc: 'Thermoforming for complex shapes',
+                },
+                {
+                  img: 'photo-1581092918056-0c4c3acd3789',
+                  title: 'Ultrasonic Welding',
+                  desc: 'Precision plastic bonding technology',
+                },
+                {
+                  img: 'photo-1581092160497-a5a5b2e3e5c3',
+                  title: 'Final Inspection',
+                  desc: '100% quality verification',
+                },
+              ].map((item, idx) => (
+                <div key={idx} className="flex-shrink-0 w-80 md:w-96 snap-start group">
+                  <div className="relative overflow-hidden rounded-3xl shadow-xl group-hover:shadow-2xl transition-all duration-500">
+                    <img
+                      src={`https://images.unsplash.com/${item.img}?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=85`}
+                      alt={item.title}
+                      className="w-full h-72 object-cover group-hover:scale-110 transition-transform duration-700"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
+                    <div className="absolute bottom-6 left-6 right-6">
+                      <h3 className="text-2xl font-black text-white drop-shadow-lg">
+                        {item.title}
+                      </h3>
+                      <p className="text-sm text-gray-200 mt-2">{item.desc}</p>
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
 
-      {/* Final CTA */}
-      <Section className="bg-gradient-to-br from-gray-900 via-slate-900 to-blue-950 text-white py-32">
-        <Container>
-          <div className="text-center max-w-4xl mx-auto">
-            <h2 className="text-5xl md:text-7xl font-black mb-12 bg-gradient-to-r from-white via-blue-100 to-cyan-100 bg-clip-text text-transparent">
-              Scale Your Electronics Production
-            </h2>
-            <p className="text-xl md:text-2xl mb-16 text-gray-300 leading-relaxed max-w-3xl mx-auto">
-              Zero-defect device bodies for global OEMs. Partner with India's precision
-              manufacturing leader.
-            </p>
-            <div className="flex flex-col sm:flex-row gap-8 justify-center items-center">
-              <a
-                href="/services"
-                className="group bg-gradient-to-r from-blue-600 via-indigo-600 to-purple-600 hover:from-blue-700 hover:via-indigo-700 hover:to-purple-700 text-white px-16 py-7 rounded-3xl font-bold text-xl shadow-2xl hover:shadow-3xl transform hover:-translate-y-2 transition-all duration-500"
-              >
-                View Full Capabilities{' '}
-                <span className="ml-2 inline-block group-hover:translate-x-2 transition-transform">
-                  →
-                </span>
-              </a>
-              <a
-                href="/contact"
-                className="px-16 py-7 border-2 border-white/30 hover:border-white/70 bg-white/5 backdrop-blur-xl rounded-3xl font-bold text-xl hover:bg-white/10 transition-all duration-500"
-              >
-                Request Manufacturing Quote
-              </a>
+            <div className="text-center mt-8">
+              <p className="text-gray-400 text-sm flex items-center justify-center gap-2">
+                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M9 5l7 7-7 7"
+                  />
+                </svg>
+                Scroll to explore all capabilities
+                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M15 19l-7-7 7-7"
+                  />
+                </svg>
+              </p>
             </div>
           </div>
-        </Container>
-      </Section>
+        </div>
 
-      {/* People Section */}
-      <Section className="bg-gradient-to-b from-slate-50 to-white py-24">
-        <Container>
-          <div className="text-center max-w-4xl mx-auto">
-            <h2 className="text-4xl md:text-6xl font-black text-gray-900 mb-8">
-              Our People Power Our Progress
+        <style jsx>{`
+          .scrollbar-hide::-webkit-scrollbar {
+            display: none;
+          }
+        `}</style>
+      </section>
+
+      {/* 6. R&D Section */}
+      <section className="py-32 px-4 md:px-8 lg:px-16 bg-gradient-to-br from-blue-50 via-white to-purple-50/30">
+        <div className="max-w-7xl mx-auto">
+          <div className="text-center mb-20">
+            <div className="inline-block px-4 py-2 bg-purple-100 text-purple-700 text-sm font-bold uppercase tracking-wider rounded-full mb-6">
+              Innovation Hub
+            </div>
+            <h2 className="text-4xl md:text-5xl lg:text-6xl font-black mb-8 text-gray-900 leading-tight">
+              Research & Development
             </h2>
-            <p className="text-xl text-gray-600 mb-12 leading-relaxed">
-              Behind every innovation, milestone, and solution is a passionate team that makes it
-              happen. Meet the people who bring purpose, precision, and heart to everything we do.
+            <p className="text-xl md:text-2xl text-gray-700 max-w-3xl mx-auto leading-relaxed">
+              Engineering precision enclosures for tomorrow's electronics
             </p>
-            <div className="flex flex-col sm:flex-row gap-6 justify-center items-center">
-              <a
-                href="/leadership"
-                className="inline-block bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 text-white px-12 py-5 rounded-2xl font-bold text-lg shadow-xl hover:shadow-2xl transform hover:-translate-y-1 transition-all duration-300"
-              >
-                Meet Our Leadership
-              </a>
-              <a
-                href="/careers"
-                className="inline-block border-2 border-blue-600 text-blue-600 hover:bg-blue-600 hover:text-white px-12 py-5 rounded-2xl font-bold text-lg shadow-lg hover:shadow-xl transform hover:-translate-y-1 transition-all duration-300"
-              >
-                Life at Our Company
-              </a>
+          </div>
+
+          <div className="grid md:grid-cols-2 gap-16 lg:gap-24 items-center mb-20">
+            <div>
+              <h3 className="text-3xl md:text-4xl font-black mb-8 text-gray-900 leading-tight">
+                Designing Next-Generation Electronic Enclosures
+              </h3>
+
+              <p className="text-lg md:text-xl text-gray-700 leading-relaxed mb-6">
+                Our R&D centers specialize in developing innovative plastic and metal enclosures for
+                consumer electronics, telecommunications devices, and industrial equipment. We
+                engineer precision body components that combine durability, aesthetics, and
+                functionality.
+              </p>
+
+              <p className="text-lg md:text-xl text-gray-700 leading-relaxed mb-8">
+                From injection molding to die-casting, our dedicated R&D teams continuously innovate
+                in materials science, thermal management, and ergonomic design—delivering enclosure
+                solutions that protect and enhance electronic devices across industries.
+              </p>
+
+              <div className="space-y-6">
+                <div className="flex items-start space-x-4">
+                  <div className="flex-shrink-0 w-12 h-12 bg-blue-600 rounded-xl flex items-center justify-center">
+                    <svg
+                      className="w-6 h-6 text-white"
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth={2}
+                        d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z"
+                      />
+                    </svg>
+                  </div>
+                  <div>
+                    <h4 className="text-xl font-bold text-gray-900 mb-2">
+                      Advanced Material Engineering
+                    </h4>
+                    <p className="text-gray-700">
+                      High-grade plastics, aluminum alloys, and composite materials for durability
+                    </p>
+                  </div>
+                </div>
+
+                <div className="flex items-start space-x-4">
+                  <div className="flex-shrink-0 w-12 h-12 bg-emerald-600 rounded-xl flex items-center justify-center">
+                    <svg
+                      className="w-6 h-6 text-white"
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth={2}
+                        d="M7 21a4 4 0 01-4-4V5a2 2 0 012-2h4a2 2 0 012 2v12a4 4 0 01-4 4zm0 0h12a2 2 0 002-2v-4a2 2 0 00-2-2h-2.343M11 7.343l1.657-1.657a2 2 0 012.828 0l2.829 2.829a2 2 0 010 2.828l-8.486 8.485M7 17h.01"
+                      />
+                    </svg>
+                  </div>
+                  <div>
+                    <h4 className="text-xl font-bold text-gray-900 mb-2">
+                      Precision Tooling & Molding
+                    </h4>
+                    <p className="text-gray-700">
+                      Custom tool design for complex geometries and tight tolerances
+                    </p>
+                  </div>
+                </div>
+
+                <div className="flex items-start space-x-4">
+                  <div className="flex-shrink-0 w-12 h-12 bg-purple-600 rounded-xl flex items-center justify-center">
+                    <svg
+                      className="w-6 h-6 text-white"
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth={2}
+                        d="M9 3v2m6-2v2M9 19v2m6-2v2M5 9H3m2 6H3m18-6h-2m2 6h-2M7 19h10a2 2 0 002-2V7a2 2 0 00-2-2H7a2 2 0 00-2 2v10a2 2 0 002 2zM9 9h6v6H9V9z"
+                      />
+                    </svg>
+                  </div>
+                  <div>
+                    <h4 className="text-xl font-bold text-gray-900 mb-2">
+                      Thermal & Impact Resistance
+                    </h4>
+                    <p className="text-gray-700">
+                      Enclosures engineered for heat dissipation and rugged protection
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div className="relative group">
+              <img
+                src="https://images.unsplash.com/photo-1621905251918-48416bd8575a?ixlib=rb-4.0.3&auto=format&fit=crop&w=2000&q=85"
+                alt="Electronics enclosure manufacturing - injection molding"
+                className="w-full h-[500px] lg:h-[600px] object-cover rounded-3xl shadow-2xl group-hover:shadow-3xl group-hover:scale-[1.02] transition-all duration-700"
+                loading="lazy"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 rounded-3xl"></div>
+              <div className="absolute -bottom-6 -right-6 w-48 h-48 md:w-64 md:h-64 bg-gradient-to-br from-purple-500 to-blue-600 rounded-3xl -z-10 opacity-20 group-hover:opacity-30 transition-opacity duration-500"></div>
             </div>
           </div>
-        </Container>
-      </Section>
+
+          <div className="grid md:grid-cols-4 gap-8 max-w-6xl mx-auto">
+            <div className="text-center p-8 bg-white rounded-3xl shadow-lg hover:shadow-2xl transition-all duration-500 hover:-translate-y-2 border border-gray-100">
+              <div className="text-5xl md:text-6xl font-black text-blue-600 mb-4">6</div>
+              <p className="text-lg font-bold text-gray-800">Dedicated R&D Centers</p>
+            </div>
+
+            <div className="text-center p-8 bg-white rounded-3xl shadow-lg hover:shadow-2xl transition-all duration-500 hover:-translate-y-2 border border-gray-100">
+              <div className="text-5xl md:text-6xl font-black text-emerald-600 mb-4">150+</div>
+              <p className="text-lg font-bold text-gray-800">Design Engineers</p>
+            </div>
+
+            <div className="text-center p-8 bg-white rounded-3xl shadow-lg hover:shadow-2xl transition-all duration-500 hover:-translate-y-2 border border-gray-100">
+              <div className="text-5xl md:text-6xl font-black text-purple-600 mb-4">800+</div>
+              <p className="text-lg font-bold text-gray-800">Enclosure Designs</p>
+            </div>
+
+            <div className="text-center p-8 bg-white rounded-3xl shadow-lg hover:shadow-2xl transition-all duration-500 hover:-translate-y-2 border border-gray-100">
+              <div className="text-5xl md:text-6xl font-black text-orange-600 mb-4">50+</div>
+              <p className="text-lg font-bold text-gray-800">Material Variants</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* 7. Quality Certifications */}
+      <section className="py-32 px-4 md:px-8 lg:px-16 bg-white">
+        <div className="max-w-7xl mx-auto">
+          <div className="text-center mb-20">
+            <div className="inline-block px-4 py-2 bg-green-100 text-green-700 text-sm font-bold uppercase tracking-wider rounded-full mb-6">
+              Quality Assurance
+            </div>
+            <h2 className="text-4xl md:text-5xl lg:text-6xl font-black mb-6 text-gray-900">
+              Globally Certified Manufacturing
+            </h2>
+            <p className="text-xl text-gray-700 max-w-3xl mx-auto">
+              Adherence to international standards across all facilities
+            </p>
+          </div>
+
+          <div className="grid md:grid-cols-3 gap-8">
+            {[
+              { cert: 'ISO 9001:2015', desc: 'Quality Management Systems' },
+              { cert: 'ISO 14001:2015', desc: 'Environmental Management' },
+              { cert: 'IATF 16949', desc: 'Automotive Quality Standards' },
+              { cert: 'ISO 45001', desc: 'Occupational Health & Safety' },
+              { cert: 'RoHS & REACH', desc: 'Material Compliance' },
+              { cert: 'UL / CE / FCC', desc: 'Product Certifications' },
+            ].map((item, idx) => (
+              <div
+                key={idx}
+                className="p-8 bg-gradient-to-br from-gray-50 to-white border-2 border-gray-200 rounded-3xl hover:border-green-400 hover:shadow-xl transition-all duration-500 text-center"
+              >
+                <div className="w-20 h-20 bg-green-100 rounded-2xl mx-auto mb-6 flex items-center justify-center">
+                  <svg
+                    className="w-10 h-10 text-green-600"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"
+                    />
+                  </svg>
+                </div>
+                <h3 className="text-2xl font-black text-gray-900 mb-3">{item.cert}</h3>
+                <p className="text-gray-600 font-medium">{item.desc}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* 8. Long-term Partnerships */}
+      <section className="py-32 px-4 md:px-8 lg:px-16 bg-gradient-to-br from-blue-50 to-indigo-50/30">
+        <div className="max-w-4xl mx-auto text-center">
+          <div className="inline-block px-4 py-2 bg-indigo-100 text-indigo-700 text-sm font-bold uppercase tracking-wider rounded-full mb-6">
+            Our Commitment
+          </div>
+          <h2 className="text-4xl md:text-5xl lg:text-6xl font-black mb-8 text-gray-900">
+            Built for Long-Term Partnerships
+          </h2>
+          <p className="text-2xl md:text-3xl text-gray-700 leading-relaxed mb-12 font-semibold">
+            "We don't chase short-term wins. Our focus has always been building enduring
+            relationships through operational excellence, consistent quality, and unwavering
+            reliability."
+          </p>
+          <p className="text-xl text-gray-600 leading-relaxed max-w-3xl mx-auto">
+            This philosophy has helped us retain clients for 15+ years on average—a testament to
+            trust earned through three decades of delivering on promises, batch after batch.
+          </p>
+        </div>
+      </section>
+
+      {/* 9. Leadership Philosophy */}
+      <section className="py-32 px-4 md:px-8 lg:px-16 bg-white">
+        <div className="max-w-5xl mx-auto">
+          <div className="text-center mb-16">
+            <div className="inline-block px-4 py-2 bg-gray-100 text-gray-700 text-sm font-bold uppercase tracking-wider rounded-full mb-6">
+              Leadership Perspective
+            </div>
+            <h2 className="text-4xl md:text-5xl lg:text-6xl font-black mb-8 text-gray-900">
+              Guided by Experience, Driven by Excellence
+            </h2>
+          </div>
+
+          <div className="bg-gradient-to-br from-gray-50 to-blue-50/30 p-12 md:p-16 rounded-3xl border-2 border-gray-200 shadow-xl">
+            <blockquote className="text-2xl md:text-3xl lg:text-4xl leading-relaxed text-gray-700 italic font-light mb-8">
+              "Our focus has always been building long-term partnerships through operational
+              excellence and trust—leveraging 30+ years of hard-earned industry expertise to deliver
+              at global scale."
+            </blockquote>
+            <p className="text-xl text-gray-600 font-medium">— MPS Electronics Leadership Team</p>
+          </div>
+
+          <div className="grid md:grid-cols-3 gap-8 mt-16">
+            <div className="text-center p-8">
+              <h4 className="text-3xl font-black text-blue-600 mb-3">Experience</h4>
+              <p className="text-gray-700 text-lg">
+                Decades of manufacturing wisdom guiding every decision
+              </p>
+            </div>
+            <div className="text-center p-8">
+              <h4 className="text-3xl font-black text-emerald-600 mb-3">Reliability</h4>
+              <p className="text-gray-700 text-lg">
+                Consistent delivery, batch after batch, year after year
+              </p>
+            </div>
+            <div className="text-center p-8">
+              <h4 className="text-3xl font-black text-purple-600 mb-3">Innovation</h4>
+              <p className="text-gray-700 text-lg">
+                Continuous improvement without compromising quality
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+     
     </div>
   );
 };
 
-export default StoryPage;
+export default OurStoryPage;

@@ -7,9 +7,40 @@ export const ROUTES = {
   INDUSTRIES: '/industries',
   CONTACT: '/contact',
   CAREERS: '/careers',
+
+  // About Section Routes
   STORY: '/about/story',
   OUR_LEGACY: '/about/legacy',
+  OUR_LEADERSHIP: '/about/leadership',
+  OUR_PRESENCE: '/about/presence',
+  OUR_RECOGNITIONS: '/about/recognitions',
+
+  // Business Routes
   MOBILE_PHONES: '/business/mobile',
+  OUR_PRODUCTS: '/business/products',
+  OUR_INNOVATION: '/business/innovation',
+  OUR_B2B: '/business/b2b',
+
+  // Investors Routes
+  INVESTORS_FINANCIALS: '/investors/financials',
+  INVESTORS_FILINGS: '/investors/filings',
+  INVESTORS_GOVERNANCE: '/investors/governance',
+  INVESTORS_SHAREHOLDERS: '/investors/shareholders',
+
+  // Responsibility Routes
+  RESPONSIBILITY_SUSTAINABILITY: '/responsibility/sustainability',
+  RESPONSIBILITY_ESG: '/responsibility/esg',
+  RESPONSIBILITY_COMMUNITY: '/responsibility/community',
+
+  // Careers Routes
+  CAREERS_LIFE: '/careers/life',
+  CAREERS_JOBS: '/careers/jobs',
+  CAREERS_BENEFITS: '/careers/benefits',
+
+  // Newsroom Routes
+  NEWSROOM_PRESS: '/newsroom/press',
+  NEWSROOM_BLOG: '/newsroom/blog',
+  NEWSROOM_EVENTS: '/newsroom/events',
 } as const;
 
 export const SOCIAL_LINKS = {

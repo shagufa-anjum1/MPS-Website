@@ -1,7 +1,6 @@
-// src/pages/About/legacy.tsx - Complete Legacy Page
+// src/pages/About/legacy.tsx - Clean Legacy Page with Image + Contact Form Layout
 import React from 'react';
 
-// Inline Components with proper TypeScript types
 interface ContainerProps {
   children: React.ReactNode;
   className?: string;
@@ -24,14 +23,6 @@ const Section = React.forwardRef<HTMLElement, SectionProps>(({ children, classNa
 Section.displayName = 'Section';
 
 const LegacyPage: React.FC = () => {
-  const heroRef = React.useRef<HTMLElement>(null);
-  const timelineRef = React.useRef<HTMLElement>(null);
-  const contactRef = React.useRef<HTMLElement>(null);
-
-  const [heroVisible, setHeroVisible] = React.useState(false);
-  const [timelineVisible, setTimelineVisible] = React.useState(false);
-  const [contactVisible, setContactVisible] = React.useState(false);
-
   const [formData, setFormData] = React.useState({
     enquiryType: '',
     country: '',
@@ -40,33 +31,6 @@ const LegacyPage: React.FC = () => {
     company: '',
     message: '',
   });
-
-  // Intersection Observer Setup
-  React.useEffect(() => {
-    const observerOptions = { threshold: 0.1 };
-
-    const heroObserver = new IntersectionObserver(([entry]) => {
-      setHeroVisible(entry.isIntersecting);
-    }, observerOptions);
-
-    const timelineObserver = new IntersectionObserver(([entry]) => {
-      setTimelineVisible(entry.isIntersecting);
-    }, observerOptions);
-
-    const contactObserver = new IntersectionObserver(([entry]) => {
-      setContactVisible(entry.isIntersecting);
-    }, observerOptions);
-
-    if (heroRef.current) heroObserver.observe(heroRef.current);
-    if (timelineRef.current) timelineObserver.observe(timelineRef.current);
-    if (contactRef.current) contactObserver.observe(contactRef.current);
-
-    return () => {
-      heroObserver.disconnect();
-      timelineObserver.disconnect();
-      contactObserver.disconnect();
-    };
-  }, []);
 
   const handleInputChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>
@@ -81,93 +45,50 @@ const LegacyPage: React.FC = () => {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     console.log('Form submitted:', formData);
-    // Add your form submission logic here
     alert('Thank you! We will get back to you soon.');
   };
 
   const timelineMilestones = [
     {
-      year: '1993-94',
-      title: 'The Beginning',
-      description: 'Entered the consumer electronics space with color television manufacturing',
-      icon: '📺',
-      highlight: true,
-    },
-    {
-      year: '1996',
-      title: 'First Major Hub',
-      description: 'Set up our first major production hub – Noida Facility 1, Uttar Pradesh',
-      icon: '🏭',
-      highlight: false,
-    },
-    {
-      year: '2008',
-      title: 'Lighting Innovation',
+      year: '1993',
+      title: 'Foundation',
       description:
-        'Diversified into lighting with CFLs and initiated our reverse logistics operations',
-      icon: '💡',
-      highlight: false,
+        'Established with a vision to deliver precision-engineered electronic enclosures',
     },
     {
-      year: '2010',
-      title: 'Appliances Launch',
-      description:
-        'Incorporated Dixon Appliances; began production of washing machines, LED TVs, sheet metal & plastic moulded components',
-      icon: '🔧',
-      highlight: false,
+      year: '2000',
+      title: 'Capacity Expansion',
+      description: 'Scaled production capabilities with advanced injection molding technology',
     },
     {
-      year: '2014',
-      title: 'Revenue Milestone',
-      description: 'Surpassed ₹1,000 Cr in standalone revenue, marking a major growth milestone',
-      icon: '📈',
-      highlight: true,
+      year: '2005',
+      title: 'Global Partnerships',
+      description: 'Secured first international clients from Europe and Asia',
     },
     {
-      year: '2016',
-      title: 'Mobile Manufacturing',
-      description: 'Expanded into mobile manufacturing under Padget Electronics',
-      icon: '📱',
-      highlight: false,
+      year: '2012',
+      title: 'R&D Centers',
+      description: 'Launched dedicated R&D facilities for material science and design innovation',
     },
     {
-      year: '2017',
-      title: 'Public Listing',
-      description:
-        'Listed on BSE & NSE; partnered with Aditya Infotech to launch CCTV & DVR manufacturing through All India Limited',
-      icon: '🏢',
-      highlight: true,
-    },
-    {
-      year: '2018',
-      title: 'LED Panel Leader',
-      description:
-        "Started LED TV panel production (LCM) at Tirupati, becoming India's largest facility of its kind",
-      icon: '🖥️',
-      highlight: false,
+      year: '2015',
+      title: 'Multi-Facility Network',
+      description: 'Scaled to 12+ state-of-the-art manufacturing plants across India',
     },
     {
       year: '2020',
-      title: 'Set-Top Box Entry',
-      description: 'Ventured into set-top box manufacturing, further diversifying our portfolio',
-      icon: '📦',
-      highlight: false,
-    },
-    {
-      year: '2021-2023',
-      title: 'Rapid Expansion',
-      description:
-        'Added fully automatic top load washing machines, hearables & wearables, telecom & IT hardware, and inverter AC control boards',
-      icon: '🚀',
-      highlight: true,
+      title: 'Sustainability Initiative',
+      description: 'Launched green manufacturing program targeting net-zero operations by 2030',
     },
     {
       year: '2024',
-      title: 'South India Growth',
-      description:
-        'Started refrigerator production, expanding our white goods presence; Established Chennai IT plant, our biggest presence in South India',
-      icon: '🌟',
-      highlight: true,
+      title: 'South India Expansion',
+      description: 'Opened largest facility in Chennai serving automotive and telecom sectors',
+    },
+    {
+      year: '2026',
+      title: 'Industry Leadership',
+      description: 'Serving 150+ global clients with 35K+ employees across 24 facilities',
     },
   ];
 
@@ -182,144 +103,71 @@ const LegacyPage: React.FC = () => {
     'Singapore',
     'UAE',
     'Japan',
+    'China',
+    'South Korea',
     'Other',
   ];
 
   return (
-    <div className="w-full">
-      {/* Hero Section */}
-      <Section
-        ref={heroRef}
-        className={`overflow-hidden transition-all duration-1000 bg-gradient-to-br from-indigo-50 via-purple-50 to-blue-50 ${
-          heroVisible ? 'opacity-100 scale-100' : 'opacity-0 scale-105'
-        }`}
+    <div className="w-full bg-white text-gray-900">
+      {/* Hero Section with Background Image */}
+      <section
+        className="relative h-[70vh] bg-cover bg-center flex items-center justify-center text-center text-white overflow-hidden"
+        style={{
+          backgroundImage:
+            "linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.5)), url('https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2500&q=85')",
+        }}
       >
-        <Container>
-          <div className="min-h-[75vh] flex items-center justify-center text-center px-4">
-            <div className="max-w-5xl">
-              <div className="mb-8">
-                <span className="inline-block px-6 py-3 bg-purple-100 text-purple-800 rounded-full text-sm font-bold tracking-wide mb-6">
-                  OUR LEGACY
-                </span>
-              </div>
-              <h1 className="text-5xl md:text-7xl lg:text-8xl font-black mb-8 bg-gradient-to-r from-gray-900 via-purple-900 to-indigo-900 bg-clip-text text-transparent leading-tight">
-                A Legacy of Excellence, Innovation, and Lasting Impact
-              </h1>
-              <p className="text-xl md:text-2xl text-gray-700 mb-12 max-w-4xl mx-auto leading-relaxed">
-                From a single product line to a diversified industry leader, our journey is built on
-                innovation, excellence, and trust. Explore the milestones that have shaped our
-                legacy and continue to drive us toward a smarter, more connected future.
-              </p>
-            </div>
-          </div>
-        </Container>
-      </Section>
+        <div className="absolute inset-0 bg-black bg-opacity-50 z-0"></div>
+        <div className="relative z-10 max-w-4xl mx-auto px-4">
+          <span className="inline-block px-5 py-2 bg-white/20 backdrop-blur-md text-sm uppercase tracking-widest font-semibold rounded-full mb-6 border border-white/30">
+            Our Legacy
+          </span>
+          <h1 className="text-4xl md:text-6xl font-black mb-6 leading-tight drop-shadow-2xl">
+            A Legacy of Excellence, Innovation, and Lasting Impact
+          </h1>
+          <p className="text-lg md:text-xl max-w-2xl mx-auto leading-relaxed opacity-95">
+            From a single facility to India's trusted manufacturing partner
+          </p>
+        </div>
+      </section>
 
       {/* Journey Introduction */}
-      <Section className="bg-white py-24">
+      <Section className="py-20 bg-white">
         <Container>
-          <div className="text-center max-w-4xl mx-auto">
-            <div className="inline-block p-6 bg-gradient-to-br from-purple-100 to-blue-100 rounded-3xl mb-8">
-              <div className="text-6xl">🏆</div>
-            </div>
-            <h2 className="text-4xl md:text-5xl font-black text-gray-900 mb-8">
-              A Journey of Innovation and Excellence
+          <div className="max-w-3xl mx-auto text-center">
+            <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+              A journey of innovation and excellence
             </h2>
-            <p className="text-xl text-gray-600 leading-relaxed">
-              Every milestone represents our commitment to pushing boundaries, embracing change, and
-              delivering exceptional value. This is the story of how we transformed from a vision
-              into India's trusted manufacturing partner.
+            <p className="text-base md:text-lg text-gray-600 leading-relaxed">
+              From a single product line to a diversified industry leader, our journey is built on
+              innovation, excellence, and trust. Explore the milestones that have shaped our legacy
+              and continue to drive us toward a smarter, more connected future.
             </p>
           </div>
         </Container>
       </Section>
 
       {/* Timeline Section */}
-      <Section
-        ref={timelineRef}
-        className={`bg-gradient-to-b from-slate-50 to-white py-24 transition-all duration-1000 ${
-          timelineVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-12'
-        }`}
-      >
+      <Section className="py-20 bg-gradient-to-b from-slate-50 to-white">
         <Container>
-          <div className="text-center mb-20">
-            <h2 className="text-4xl md:text-6xl font-black mb-8 bg-gradient-to-r from-purple-900 via-indigo-900 to-blue-900 bg-clip-text text-transparent">
-              Milestones That Define Us
-            </h2>
-            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-              Three decades of relentless innovation and growth
-            </p>
-          </div>
-
-          {/* Timeline Grid */}
-          <div className="relative">
-            {/* Vertical Line - Hidden on mobile */}
-            <div className="hidden lg:block absolute left-1/2 transform -translate-x-1/2 w-1 h-full bg-gradient-to-b from-purple-200 via-indigo-300 to-blue-200"></div>
-
-            <div className="space-y-12">
+          <div className="max-w-4xl mx-auto">
+            <div className="space-y-6">
               {timelineMilestones.map((milestone, index) => (
                 <div
                   key={index}
-                  className={`relative flex items-center ${
-                    index % 2 === 0 ? 'lg:flex-row' : 'lg:flex-row-reverse'
-                  } flex-col`}
+                  className="flex gap-6 items-start group hover:bg-white p-6 rounded-2xl transition-all duration-300 border border-transparent hover:border-blue-200 hover:shadow-lg"
                 >
-                  {/* Timeline Card */}
-                  <div
-                    className={`w-full lg:w-5/12 ${
-                      index % 2 === 0 ? 'lg:pr-12' : 'lg:pl-12'
-                    } mb-8 lg:mb-0`}
-                  >
-                    <div
-                      className={`group p-8 rounded-3xl shadow-xl hover:shadow-2xl hover:-translate-y-3 transition-all duration-500 border overflow-hidden ${
-                        milestone.highlight
-                          ? 'bg-gradient-to-br from-purple-600 via-indigo-600 to-blue-600 border-purple-400 text-white'
-                          : 'bg-white border-gray-200 hover:border-purple-300 hover:bg-gradient-to-br hover:from-purple-50 hover:to-indigo-50'
-                      }`}
-                    >
-                      <div className="flex items-start gap-6">
-                        <div
-                          className={`flex-shrink-0 w-16 h-16 rounded-2xl flex items-center justify-center text-3xl shadow-lg group-hover:scale-110 transition-transform ${
-                            milestone.highlight
-                              ? 'bg-white/20 backdrop-blur-lg'
-                              : 'bg-gradient-to-br from-purple-100 to-indigo-100'
-                          }`}
-                        >
-                          {milestone.icon}
-                        </div>
-                        <div className="flex-1">
-                          <div
-                            className={`text-sm font-bold mb-2 tracking-wider ${
-                              milestone.highlight ? 'text-purple-100' : 'text-purple-600'
-                            }`}
-                          >
-                            {milestone.year}
-                          </div>
-                          <h3
-                            className={`text-2xl font-bold mb-3 ${
-                              milestone.highlight
-                                ? 'text-white'
-                                : 'text-gray-900 group-hover:text-purple-600'
-                            } transition-colors`}
-                          >
-                            {milestone.title}
-                          </h3>
-                          <p
-                            className={`text-base leading-relaxed ${
-                              milestone.highlight
-                                ? 'text-purple-100'
-                                : 'text-gray-600 group-hover:text-gray-800'
-                            }`}
-                          >
-                            {milestone.description}
-                          </p>
-                        </div>
-                      </div>
-                    </div>
+                  {/* Year */}
+                  <div className="flex-shrink-0 w-20">
+                    <div className="text-xl font-black text-blue-600">{milestone.year}</div>
                   </div>
 
-                  {/* Center Dot - Hidden on mobile */}
-                  <div className="hidden lg:block absolute left-1/2 transform -translate-x-1/2 w-6 h-6 rounded-full bg-gradient-to-br from-purple-500 to-indigo-500 border-4 border-white shadow-xl z-10"></div>
+                  {/* Content */}
+                  <div className="flex-1 border-l-2 border-gray-200 pl-6 group-hover:border-blue-400 transition-colors">
+                    <h3 className="text-lg font-bold text-gray-900 mb-2">{milestone.title}</h3>
+                    <p className="text-sm text-gray-600 leading-relaxed">{milestone.description}</p>
+                  </div>
                 </div>
               ))}
             </div>
@@ -327,95 +175,58 @@ const LegacyPage: React.FC = () => {
         </Container>
       </Section>
 
-      {/* Contact Section */}
-      <Section
-        ref={contactRef}
-        className={`bg-gradient-to-br from-gray-900 via-slate-900 to-purple-950 text-white py-32 transition-all duration-1000 ${
-          contactVisible ? 'opacity-100' : 'opacity-0'
-        }`}
-      >
+      {/* Contact Section - Left Form + Right Image */}
+      <Section className="py-24 bg-white">
         <Container>
-          <div className="grid lg:grid-cols-2 gap-16 items-center">
-            {/* Left Column - CTA Content */}
-            <div>
-              <div className="inline-block px-6 py-3 bg-purple-500/20 backdrop-blur-lg border border-purple-400/30 rounded-full text-sm font-bold tracking-wide mb-8">
-                CONNECT WITH US
-              </div>
-              <h2 className="text-4xl md:text-6xl font-black mb-8 bg-gradient-to-r from-white via-purple-200 to-blue-200 bg-clip-text text-transparent">
-                Let's Build Together!
-              </h2>
-              <p className="text-xl text-gray-300 leading-relaxed mb-12">
-                We work closely with leading global and domestic brands to deliver reliable,
-                cost-effective, and scalable manufacturing solutions. If you're looking for
-                end-to-end support, from product design to mass production, fill out the form and
-                we'll reach out to get started.
-              </p>
+          <div className="text-center mb-12">
+            <h2 className="text-3xl md:text-4xl font-black text-gray-900 mb-4">Connect With Us</h2>
+            <p className="text-lg text-gray-700 font-semibold mb-3">Let's build together!</p>
+            <p className="text-base text-gray-600 max-w-3xl mx-auto leading-relaxed">
+              We work closely with leading global and domestic brands to deliver reliable,
+              cost-effective, and scalable manufacturing solutions.
+            </p>
+          </div>
 
-              {/* Trust Indicators */}
-              <div className="grid grid-cols-2 gap-6">
-                <div className="p-6 bg-white/5 backdrop-blur-lg rounded-2xl border border-white/10">
-                  <div className="text-3xl mb-3">⚡</div>
-                  <div className="text-2xl font-bold text-white mb-2">24-48 hrs</div>
-                  <div className="text-sm text-gray-400">Response Time</div>
-                </div>
-                <div className="p-6 bg-white/5 backdrop-blur-lg rounded-2xl border border-white/10">
-                  <div className="text-3xl mb-3">🤝</div>
-                  <div className="text-2xl font-bold text-white mb-2">100+</div>
-                  <div className="text-sm text-gray-400">Global Partners</div>
-                </div>
-              </div>
-            </div>
-
-            {/* Right Column - Contact Form */}
-            <div className="bg-white/10 backdrop-blur-xl p-10 rounded-3xl border border-white/20 shadow-2xl">
-              <form onSubmit={handleSubmit} className="space-y-6">
+          {/* Two Column Layout - Form Left + Image Right */}
+          <div className="grid lg:grid-cols-2 gap-12 items-center max-w-6xl mx-auto">
+            {/* Left Column - Contact Form */}
+            <div className="bg-gradient-to-br from-gray-50 to-blue-50/30 p-8 md:p-10 rounded-3xl border-2 border-gray-200 shadow-xl">
+              <form onSubmit={handleSubmit} className="space-y-5">
                 {/* Enquiry Type */}
                 <div>
-                  <label className="block text-sm font-bold text-white mb-3">
-                    Enquiry Type <span className="text-red-400">*</span>
+                  <label className="block text-sm font-bold text-gray-900 mb-2">
+                    Enquiry Type <span className="text-red-500">*</span>
                   </label>
                   <select
                     name="enquiryType"
                     value={formData.enquiryType}
                     onChange={handleInputChange}
                     required
-                    className="w-full px-5 py-4 bg-white/10 border border-white/30 rounded-xl text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent transition-all"
+                    className="w-full px-4 py-3 bg-white border-2 border-gray-300 rounded-xl text-gray-900 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
                   >
-                    <option value="" className="text-gray-900">
-                      Select Enquiry Type
-                    </option>
-                    <option value="manufacturing" className="text-gray-900">
-                      Manufacturing Partnerships
-                    </option>
-                    <option value="vendor" className="text-gray-900">
-                      Vendor/Supply Chain
-                    </option>
-                    <option value="export" className="text-gray-900">
-                      Export Enquiry
-                    </option>
-                    <option value="hr" className="text-gray-900">
-                      HR & Careers
-                    </option>
+                    <option value="">Select Enquiry Type</option>
+                    <option value="manufacturing">Manufacturing Partnerships</option>
+                    <option value="vendor">Vendor/Supply Chain</option>
+                    <option value="export">Export Enquiry</option>
+                    <option value="hr">HR & Careers</option>
                   </select>
                 </div>
 
                 {/* Country */}
                 <div>
-                  <label className="block text-sm font-bold text-white mb-3">
-                    Country <span className="text-red-400">*</span>
+                  <label className="block text-sm font-bold text-gray-900 mb-2">
+                    Country <span className="text-red-500">*</span>
                   </label>
                   <select
                     name="country"
                     value={formData.country}
                     onChange={handleInputChange}
                     required
-                    className="w-full px-5 py-4 bg-white/10 border border-white/30 rounded-xl text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent transition-all"
+                    className="w-full px-4 py-3 bg-white border-2 border-gray-300 rounded-xl text-gray-900 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
                   >
-                    <option value="" className="text-gray-900">
-                      Select Country
-                    </option>
+                    <option value="">Select Country</option>
                     {countries.map((country) => (
-                      <option key={country} value={country} className="text-gray-900">
+                      <option key={country} value={country}>
                         {country}
                       </option>
                     ))}
@@ -424,8 +235,8 @@ const LegacyPage: React.FC = () => {
 
                 {/* Name */}
                 <div>
-                  <label className="block text-sm font-bold text-white mb-3">
-                    Full Name <span className="text-red-400">*</span>
+                  <label className="block text-sm font-bold text-gray-900 mb-2">
+                    Full Name <span className="text-red-500">*</span>
                   </label>
                   <input
                     type="text"
@@ -434,14 +245,14 @@ const LegacyPage: React.FC = () => {
                     onChange={handleInputChange}
                     required
                     placeholder="Enter your full name"
-                    className="w-full px-5 py-4 bg-white/10 border border-white/30 rounded-xl text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent transition-all"
+                    className="w-full px-4 py-3 bg-white border-2 border-gray-300 rounded-xl text-gray-900 text-sm placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
                   />
                 </div>
 
                 {/* Email */}
                 <div>
-                  <label className="block text-sm font-bold text-white mb-3">
-                    Email Address <span className="text-red-400">*</span>
+                  <label className="block text-sm font-bold text-gray-900 mb-2">
+                    Email Address <span className="text-red-500">*</span>
                   </label>
                   <input
                     type="email"
@@ -450,27 +261,27 @@ const LegacyPage: React.FC = () => {
                     onChange={handleInputChange}
                     required
                     placeholder="your.email@example.com"
-                    className="w-full px-5 py-4 bg-white/10 border border-white/30 rounded-xl text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent transition-all"
+                    className="w-full px-4 py-3 bg-white border-2 border-gray-300 rounded-xl text-gray-900 text-sm placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
                   />
                 </div>
 
                 {/* Company */}
                 <div>
-                  <label className="block text-sm font-bold text-white mb-3">Company Name</label>
+                  <label className="block text-sm font-bold text-gray-900 mb-2">Company Name</label>
                   <input
                     type="text"
                     name="company"
                     value={formData.company}
                     onChange={handleInputChange}
                     placeholder="Your company name"
-                    className="w-full px-5 py-4 bg-white/10 border border-white/30 rounded-xl text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent transition-all"
+                    className="w-full px-4 py-3 bg-white border-2 border-gray-300 rounded-xl text-gray-900 text-sm placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
                   />
                 </div>
 
                 {/* Message */}
                 <div>
-                  <label className="block text-sm font-bold text-white mb-3">
-                    Message <span className="text-red-400">*</span>
+                  <label className="block text-sm font-bold text-gray-900 mb-2">
+                    Message <span className="text-red-500">*</span>
                   </label>
                   <textarea
                     name="message"
@@ -479,47 +290,77 @@ const LegacyPage: React.FC = () => {
                     required
                     rows={4}
                     placeholder="Tell us about your requirements..."
-                    className="w-full px-5 py-4 bg-white/10 border border-white/30 rounded-xl text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent transition-all resize-none"
+                    className="w-full px-4 py-3 bg-white border-2 border-gray-300 rounded-xl text-gray-900 text-sm placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all resize-none"
                   ></textarea>
                 </div>
 
                 {/* Submit Button */}
                 <button
                   type="submit"
-                  className="w-full bg-gradient-to-r from-purple-600 via-indigo-600 to-blue-600 hover:from-purple-700 hover:via-indigo-700 hover:to-blue-700 text-white font-bold py-5 px-8 rounded-xl shadow-2xl hover:shadow-3xl transform hover:-translate-y-1 transition-all duration-300 text-lg"
+                  className="w-full bg-gradient-to-r from-blue-600 via-indigo-600 to-purple-600 hover:from-blue-700 hover:via-indigo-700 hover:to-purple-700 text-white font-bold py-4 px-8 rounded-xl shadow-xl hover:shadow-2xl transform hover:-translate-y-1 transition-all duration-300 text-base uppercase tracking-wider"
                 >
-                  Send Message →
+                  SEND
                 </button>
               </form>
             </div>
-          </div>
-        </Container>
-      </Section>
 
-      {/* Additional CTA Section */}
-      <Section className="bg-gradient-to-br from-purple-600 via-indigo-600 to-blue-600 text-white py-24">
-        <Container>
-          <div className="text-center max-w-4xl mx-auto">
-            <h2 className="text-4xl md:text-5xl font-black mb-8">
-              Ready to Be Part of Our Legacy?
-            </h2>
-            <p className="text-xl text-purple-100 mb-12 leading-relaxed">
-              Join the brands that trust us to power their innovation. Let's create the next chapter
-              together.
-            </p>
-            <div className="flex flex-col sm:flex-row gap-6 justify-center items-center">
-              <a
-                href="/services"
-                className="inline-block bg-white text-purple-700 hover:bg-purple-50 px-12 py-5 rounded-2xl font-bold text-lg shadow-xl hover:shadow-2xl transform hover:-translate-y-1 transition-all duration-300"
-              >
-                Explore Our Capabilities
-              </a>
-              <a
-                href="/story"
-                className="inline-block border-2 border-white/50 hover:border-white bg-white/10 backdrop-blur-lg hover:bg-white/20 px-12 py-5 rounded-2xl font-bold text-lg shadow-lg hover:shadow-xl transform hover:-translate-y-1 transition-all duration-300"
-              >
-                Read Our Story
-              </a>
+            {/* Right Column - Image */}
+            <div className="relative group hidden lg:block">
+              <img
+                src="https://images.unsplash.com/photo-1573164713714-d95e436ab8d6?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1200&q=85"
+                alt="Contact MPS Electronics - Manufacturing Partnership"
+                className="w-full h-[700px] object-cover rounded-3xl shadow-2xl group-hover:shadow-3xl group-hover:scale-[1.02] transition-all duration-700"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 rounded-3xl"></div>
+
+              {/* Optional: Add info cards overlay */}
+              <div className="absolute bottom-8 left-8 right-8 bg-white/95 backdrop-blur-lg p-6 rounded-2xl shadow-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500">
+                <h3 className="text-xl font-black text-gray-900 mb-3">Quick Response</h3>
+                <div className="space-y-2">
+                  <div className="flex items-center gap-3">
+                    <div className="w-10 h-10 bg-blue-100 rounded-xl flex items-center justify-center">
+                      <svg
+                        className="w-5 h-5 text-blue-600"
+                        fill="none"
+                        stroke="currentColor"
+                        viewBox="0 0 24 24"
+                      >
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          strokeWidth={2}
+                          d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"
+                        />
+                      </svg>
+                    </div>
+                    <div>
+                      <p className="text-sm font-bold text-gray-900">24-48 Hours</p>
+                      <p className="text-xs text-gray-600">Response Time</p>
+                    </div>
+                  </div>
+                  <div className="flex items-center gap-3">
+                    <div className="w-10 h-10 bg-green-100 rounded-xl flex items-center justify-center">
+                      <svg
+                        className="w-5 h-5 text-green-600"
+                        fill="none"
+                        stroke="currentColor"
+                        viewBox="0 0 24 24"
+                      >
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          strokeWidth={2}
+                          d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"
+                        />
+                      </svg>
+                    </div>
+                    <div>
+                      <p className="text-sm font-bold text-gray-900">150+ Partners</p>
+                      <p className="text-xs text-gray-600">Global Clients</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         </Container>
