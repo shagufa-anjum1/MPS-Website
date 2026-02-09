@@ -3,7 +3,8 @@ import { Link, NavLink } from 'react-router-dom';
 import { FaBars, FaTimes, FaChevronDown, FaChevronRight, FaSearch } from 'react-icons/fa';
 import Container from '@components/Container/Container';
 import { navigationConfig } from '@config/megaMenuData';
-import { MegaMenuConfig } from '@types/megaMenu.types';
+// import { MegaMenuConfig } from '@types/megaMenu.types';
+import { MegaMenuConfig } from '../../types/megaMenu.types';
 
 /**
  * Enterprise Header Component with Mega Menu

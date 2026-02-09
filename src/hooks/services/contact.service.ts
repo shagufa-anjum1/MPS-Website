@@ -1,5 +1,5 @@
 import apiService from './api.service';
-import { ContactFormData } from '@types/index';
+import { ContactFormData } from '../../types/index';
 
 /**
  * Contact Service

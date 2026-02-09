@@ -384,11 +384,7 @@ const OurStoryPage: React.FC = () => {
           </div>
         </div>
 
-        <style jsx>{`
-          .scrollbar-hide::-webkit-scrollbar {
-            display: none;
-          }
-        `}</style>
+        <style className="flex overflow-x-auto gap-6 pb-6 snap-x snap-mandatory [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]"></style>
       </section>
 
       {/* 6. R&D Section */}
@@ -657,8 +653,6 @@ const OurStoryPage: React.FC = () => {
           </div>
         </div>
       </section>
-
-     
     </div>
   );
 };

@@ -5,7 +5,7 @@ import Card from '@components/Card/Card';
 import Loading from '@components/Loading/Loading';
 import { useApi } from '@hooks/useApi';
 import serviceService from '@/hooks/services/service.service';
-import { Service } from '@types/index';
+import { Service } from '../../types/index';
 import { FaCloud, FaMobileAlt, FaDatabase, FaShieldAlt, FaRobot, FaChartBar } from 'react-icons/fa';
 
 /**

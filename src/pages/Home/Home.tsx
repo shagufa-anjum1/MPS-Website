@@ -1,8 +1,4 @@
 import React from 'react';
-import Container from '@components/Container/Container';
-import Section from '@components/Section/Section';
-import Button from '@components/Button/Button';
-import Card from '@components/Card/Card';
 import Hero from '@components/Hero/Hero';
 import WhoWeAre from '@components/WhoWeAre/WhoWeAre';
 import WhatWeDo from '@components/WhatWeDo/WhatWeDo';
@@ -11,13 +7,7 @@ import IndustriesWeServe from '@components/IndustriesWeServe/IndustriesWeServe';
 import OurClients from '@components/OurClients/OurClients';
 import Sustainability from '@components/Sustainability/Sustainability';
 import CareersCTA from '@components/CareersCTA/CareersCTA';
-import { Link } from 'react-router-dom';
-import { ROUTES } from '@utils/constants';
 import {
-  FaRocket,
-  FaChartLine,
-  FaCogs,
-  FaUsers,
   FaIndustry,
   FaHandshake,
   FaMapMarkedAlt,
@@ -31,43 +21,14 @@ import {
   FaBolt,
   FaLeaf,
   FaShieldAlt,
+  FaUsers,
 } from 'react-icons/fa';
-import { useIntersectionObserver } from '@hooks/useIntersectionObserver';
 
 /**
  * Home Page Component
  * Enterprise-grade manufacturing company website
  */
 const Home: React.FC = () => {
-  const { targetRef: servicesRef, isIntersecting: servicesVisible } = useIntersectionObserver();
-
-  const services = [
-    {
-      icon: <FaRocket className="text-4xl text-primary-600" />,
-      title: 'Digital Transformation',
-      description:
-        'Modernize your business with cutting-edge digital solutions that drive growth and efficiency.',
-    },
-    {
-      icon: <FaChartLine className="text-4xl text-primary-600" />,
-      title: 'Business Intelligence',
-      description:
-        'Transform data into actionable insights with our advanced analytics and BI solutions.',
-    },
-    {
-      icon: <FaCogs className="text-4xl text-primary-600" />,
-      title: 'Custom Development',
-      description:
-        'Build scalable, robust applications tailored to your unique business requirements.',
-    },
-    {
-      icon: <FaUsers className="text-4xl text-primary-600" />,
-      title: 'Consulting Services',
-      description:
-        'Expert guidance to help you navigate complex technology decisions and implementations.',
-    },
-  ];
-
   return (
     <div className="overflow-hidden">
       {/* Hero Section */}
@@ -399,64 +360,6 @@ const Home: React.FC = () => {
         image="https://images.unsplash.com/photo-1552664730-d307ca884978?w=1200&h=800&fit=crop"
         backgroundColor="white"
       />
-
-      {/* Services Section */}
-     {/*  <Section background="gray">
-        <Container>
-          <div
-            ref={servicesRef}
-            className={`text-center mb-12 transition-all duration-1000 ${
-              servicesVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
-            }`}
-          >
-            <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">Our Core Services</h2>
-            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-              Comprehensive solutions designed to accelerate your digital journey and maximize
-              business value
-            </p>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-            {services.map((service, index) => (
-              <div
-                key={index}
-                className={`transition-all duration-700 delay-${index * 100} ${
-                  servicesVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
-                }`}
-              >
-                <Card hover className="h-full text-center">
-                  <div className="flex justify-center mb-4">{service.icon}</div>
-                  <h3 className="text-xl font-semibold text-gray-900 mb-3">{service.title}</h3>
-                  <p className="text-gray-600">{service.description}</p>
-                </Card>
-              </div>
-            ))}
-          </div>
-
-          <div className="text-center mt-12">
-            <Link to={ROUTES.SERVICES}>
-              <Button size="lg">View All Services</Button>
-            </Link>
-          </div>
-        </Container>
-      </Section> */}
-
-      {/* CTA Section */}
-      {/* <Section background="gray">
-        <Container>
-          <div className="bg-gradient-to-r from-primary-600 to-primary-800 rounded-2xl p-12 text-center text-white shadow-2xl">
-            <h2 className="text-4xl md:text-5xl font-bold mb-4">Ready to Get Started?</h2>
-            <p className="text-xl mb-8 text-gray-100">
-              Let's discuss how we can help transform your business
-            </p>
-            <Link to={ROUTES.CONTACT}>
-              <Button size="lg" className="bg-white text-primary-600 hover:bg-gray-100">
-                Contact Us Today
-              </Button>
-            </Link>
-          </div>
-        </Container>
-      </Section> */}
     </div>
   );
 };

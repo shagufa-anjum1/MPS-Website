@@ -1,5 +1,5 @@
 import apiService from './api.service';
-import { Service } from '@types/index';
+import { Service } from '../../types/index';
 
 /**
  * Service Service

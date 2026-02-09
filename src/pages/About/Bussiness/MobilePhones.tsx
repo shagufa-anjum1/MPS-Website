@@ -14,6 +14,7 @@ const Container: React.FC<ContainerProps> = ({ children, className = '' }) => (
 interface SectionProps {
   children: React.ReactNode;
   className?: string;
+  id? : string;
 }
 
 const Section = React.forwardRef<HTMLElement, SectionProps>(({ children, className = '' }, ref) => (

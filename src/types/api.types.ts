@@ -10,3 +10,11 @@ export interface ApiRequestConfig {
   headers?: Record<string, string>;
   params?: Record<string, string | number>;
 }
+
+// API Response Wrapper
+export interface ApiResponse<T = any> {
+  data: T;
+  message?: string;
+  success: boolean;
+  statusCode?: number;
+}

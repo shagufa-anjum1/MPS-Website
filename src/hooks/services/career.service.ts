@@ -1,5 +1,5 @@
 import apiService from './api.service';
-import { JobPosting } from '@types/index';
+import { JobPosting } from '../../types/index';
 
 /**
  * Career Service
