@@ -1,9 +1,8 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Poppins:wght@400;500;600;700;800&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-
-/* Custom Google Fonts */
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Poppins:wght@400;500;600;700;800&display=swap');
 
 @layer base {
   body {
@@ -24,13 +23,35 @@
   .animate-delay-100 {
     animation-delay: 100ms;
   }
-  
+
   .animate-delay-200 {
     animation-delay: 200ms;
   }
-  
+
   .animate-delay-300 {
     animation-delay: 300ms;
+  }
+
+  .animate-delay-400 {
+    animation-delay: 400ms;
+  }
+
+  /* New animation delay class */
+  .animation-delay-200 {
+    animation-delay: 200ms;
+  }
+
+  .animation-delay-400 {
+    animation-delay: 400ms;
+  }
+
+  /* Mega Menu Specific Animations */
+  .mega-menu-enter {
+    animation: megaMenuSlideIn 0.3s ease-out forwards;
+  }
+
+  .mega-menu-exit {
+    animation: megaMenuSlideOut 0.2s ease-in forwards;
   }
 }
 
@@ -56,37 +77,12 @@ html {
   scroll-behavior: smooth;
 }
 
-/* ... existing styles ... */
-
-/* Mega Menu Animations */
-@layer utilities {
-  .animate-delay-100 {
-    animation-delay: 100ms;
-  }
-  
-  .animate-delay-200 {
-    animation-delay: 200ms;
-  }
-  
-  .animate-delay-300 {
-    animation-delay: 300ms;
-  }
-
-  /* Mega Menu Specific Animations */
-  .mega-menu-enter {
-    animation: megaMenuSlideIn 0.3s ease-out forwards;
-  }
-
-  .mega-menu-exit {
-    animation: megaMenuSlideOut 0.2s ease-in forwards;
-  }
-}
-
 @keyframes megaMenuSlideIn {
   from {
     opacity: 0;
     transform: translateY(-10px);
   }
+
   to {
     opacity: 1;
     transform: translateY(0);
@@ -98,6 +94,7 @@ html {
     opacity: 1;
     transform: translateY(0);
   }
+
   to {
     opacity: 0;
     transform: translateY(-10px);
@@ -137,39 +134,9 @@ img[loading="lazy"] {
   0% {
     background-position: -200% 0;
   }
+
   100% {
     background-position: 200% 0;
-  }
-}
-
-/* ... existing styles ... */
-
-/* Hero Section Animations */
-@layer utilities {
-  /* Existing delay utilities */
-  .animate-delay-100 {
-    animation-delay: 100ms;
-  }
-  
-  .animate-delay-200 {
-    animation-delay: 200ms;
-  }
-  
-  .animate-delay-300 {
-    animation-delay: 300ms;
-  }
-
-  .animate-delay-400 {
-    animation-delay: 400ms;
-  }
-
-  /* New animation delay class */
-  .animation-delay-200 {
-    animation-delay: 200ms;
-  }
-
-  .animation-delay-400 {
-    animation-delay: 400ms;
   }
 }
 
@@ -178,6 +145,7 @@ img[loading="lazy"] {
   from {
     opacity: 0;
   }
+
   to {
     opacity: 1;
   }
@@ -188,6 +156,7 @@ img[loading="lazy"] {
     opacity: 0;
     transform: translateY(30px);
   }
+
   to {
     opacity: 1;
     transform: translateY(0);
@@ -209,13 +178,9 @@ img[loading="lazy"] {
   animation: shimmer 2s infinite;
 }
 
-/* Smooth scroll behavior */
-html {
-  scroll-behavior: smooth;
-}
-
 /* Performance optimization for hero */
 @media (prefers-reduced-motion: reduce) {
+
   .animate-fade-in,
   .animate-slide-up,
   .animate-bounce {
